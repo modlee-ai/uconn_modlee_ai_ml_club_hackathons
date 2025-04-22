@@ -1,0 +1,408 @@
+{
+    "base_url": "https://newsapi.org",
+    "endpoints": {
+        "/v2/everything": {
+            "filters": {
+                "date_range": {
+                    "template": "from={start_date}&to={end_date}"
+                },
+                "domain_filter": {
+                    "template": "domains={domain_list}"
+                },
+                "source_filter": {
+                    "template": "sources={source_ids}"
+                }
+            },
+            "human_context": {
+                "description": "AI Agent Guidance: This endpoint allows users to search through millions of articles published by over 150,000 news sources and blogs. It is designed for article discovery and analysis, providing a comprehensive search capability based on various criteria such as keywords, publication dates, source domains, and languages.",
+                "qa_section": {
+                    "How can I refine my search results?": "You can refine your search using advanced query options, including exact matches and logical operators.",
+                    "What sorting options are available for the results?": "Results can be sorted by relevancy, popularity, or publication date.",
+                    "What types of articles can be retrieved?": "This endpoint retrieves articles based on keywords, publication dates, source domains, and languages."
+                }
+            },
+            "pagination": {
+                "limit": 100,
+                "offset": true
+            },
+            "parameters": {
+                "domains": {
+                    "data_type": "TEXT",
+                    "description": "A comma-separated string of domains to restrict the search to.",
+                    "required": false,
+                    "required_format": null,
+                    "required_values": null,
+                    "validation_endpoint": null
+                },
+                "excludeDomains": {
+                    "data_type": "TEXT",
+                    "description": "A comma-separated string of domains to remove from the results.",
+                    "required": false,
+                    "required_format": null,
+                    "required_values": null,
+                    "validation_endpoint": null
+                },
+                "from": {
+                    "data_type": "TEXT",
+                    "description": "A date and optional time for the oldest article allowed.",
+                    "required": false,
+                    "required_format": "YYYY-MM-DD or YYYY-MM-DDTHH:MM:SS",
+                    "required_values": null,
+                    "validation_endpoint": null
+                },
+                "language": {
+                    "data_type": "TEXT",
+                    "description": "The 2-letter ISO-639-1 code of the language you want to get headlines for.",
+                    "required": false,
+                    "required_format": null,
+                    "required_values": [
+                        "ar",
+                        "de",
+                        "en",
+                        "es",
+                        "fr",
+                        "he",
+                        "it",
+                        "nl",
+                        "no",
+                        "pt",
+                        "ru",
+                        "sv",
+                        "ud",
+                        "zh"
+                    ],
+                    "validation_endpoint": null
+                },
+                "page": {
+                    "data_type": "INTEGER",
+                    "description": "Use this to page through the results.",
+                    "required": false,
+                    "required_format": "1 or greater",
+                    "required_values": null,
+                    "validation_endpoint": null
+                },
+                "pageSize": {
+                    "data_type": "INTEGER",
+                    "description": "The number of results to return per page.",
+                    "required": false,
+                    "required_format": "1-100",
+                    "required_values": null,
+                    "validation_endpoint": null
+                },
+                "q": {
+                    "data_type": "TEXT",
+                    "description": "Keywords or phrases to search for in the article title and body.",
+                    "required": true,
+                    "required_format": null,
+                    "required_values": null,
+                    "validation_endpoint": null
+                },
+                "searchIn": {
+                    "data_type": "TEXT",
+                    "description": "The fields to restrict your search to.",
+                    "required": false,
+                    "required_format": null,
+                    "required_values": [
+                        "title",
+                        "description",
+                        "content"
+                    ],
+                    "validation_endpoint": null
+                },
+                "sortBy": {
+                    "data_type": "TEXT",
+                    "description": "The order to sort the articles in.",
+                    "required": false,
+                    "required_format": null,
+                    "required_values": [
+                        "relevancy",
+                        "popularity",
+                        "publishedAt"
+                    ],
+                    "validation_endpoint": null
+                },
+                "sources": {
+                    "data_type": "TEXT",
+                    "description": "A comma-separated string of identifiers for the news sources you want headlines from.",
+                    "required": false,
+                    "required_format": null,
+                    "required_values": null,
+                    "validation_endpoint": null
+                },
+                "to": {
+                    "data_type": "TEXT",
+                    "description": "A date and optional time for the newest article allowed.",
+                    "required": false,
+                    "required_format": "YYYY-MM-DD or YYYY-MM-DDTHH:MM:SS",
+                    "required_values": null,
+                    "validation_endpoint": null
+                }
+            },
+            "response_format": {
+                "articles": [
+                    {
+                        "author": "TEXT",
+                        "content": "TEXT",
+                        "description": "TEXT",
+                        "publishedAt": "TEXT",
+                        "source": {
+                            "id": "TEXT",
+                            "name": "TEXT"
+                        },
+                        "title": "TEXT",
+                        "url": "TEXT",
+                        "urlToImage": "TEXT"
+                    }
+                ],
+                "status": "TEXT",
+                "totalResults": "INTEGER"
+            },
+            "sorting": {
+                "popularity": {
+                    "template": "sortBy=popularity"
+                },
+                "publishedAt": {
+                    "template": "sortBy=publishedAt"
+                },
+                "relevancy": {
+                    "template": "sortBy=relevancy"
+                }
+            }
+        },
+        "/v2/top-headlines": {
+            "filters": {},
+            "human_context": {
+                "description": "AI Agent Guidance: Provides access to live top and breaking news headlines from various countries, categories, or specific sources. This endpoint is particularly useful for applications that require up-to-date news tickers or headline displays.",
+                "qa_section": {
+                    "Are there specific filters required for news queries?": "Filtering by country or category is recommended for targeted news queries. You can also search using keywords.",
+                    "How does pagination affect retrieving multiple headlines?": "Pagination allows limiting results per request. Set the limit appropriately (default: 20) and use page-based navigation to access additional results.",
+                    "What type of news can be retrieved?": "This endpoint returns top and breaking news headlines filtered by country, category, or specific sources."
+                }
+            },
+            "pagination": {
+                "limit": 20,
+                "offset": true
+            },
+            "parameters": {
+                "category": {
+                    "data_type": "TEXT",
+                    "description": "The category of news to retrieve.",
+                    "required": false,
+                    "required_format": null,
+                    "required_values": [
+                        "business",
+                        "entertainment",
+                        "general",
+                        "health",
+                        "science",
+                        "sports",
+                        "technology"
+                    ],
+                    "validation_endpoint": null
+                },
+                "country": {
+                    "data_type": "TEXT",
+                    "description": "The 2-letter ISO 3166-1 code of the country to get headlines for.",
+                    "required": false,
+                    "required_format": null,
+                    "required_values": [
+                        "us",
+                        "de",
+                        "fr",
+                        "gb",
+                        "ca"
+                    ],
+                    "validation_endpoint": null
+                },
+                "page": {
+                    "data_type": "INTEGER",
+                    "description": "Use this to page through the results if the total results found is greater than the page size.",
+                    "required": false,
+                    "required_format": "1 or greater",
+                    "required_values": null,
+                    "validation_endpoint": null
+                },
+                "pageSize": {
+                    "data_type": "INTEGER",
+                    "description": "The number of results to return per page (default: 20, maximum: 100).",
+                    "required": false,
+                    "required_format": "1-100",
+                    "required_values": null,
+                    "validation_endpoint": null
+                },
+                "q": {
+                    "data_type": "TEXT",
+                    "description": "Keywords or a phrase to search for in the headlines.",
+                    "required": false,
+                    "required_format": null,
+                    "required_values": null,
+                    "validation_endpoint": null
+                },
+                "sources": {
+                    "data_type": "TEXT",
+                    "description": "A comma-separated string of identifiers for the news sources to get headlines from.",
+                    "required": false,
+                    "required_format": null,
+                    "required_values": null,
+                    "validation_endpoint": "/v2/top-headlines/sources"
+                }
+            },
+            "response_format": {
+                "articles": [
+                    {
+                        "author": "TEXT",
+                        "content": "TEXT",
+                        "description": "TEXT",
+                        "publishedAt": "TEXT",
+                        "source": {
+                            "id": "TEXT",
+                            "name": "TEXT"
+                        },
+                        "title": "TEXT",
+                        "url": "TEXT",
+                        "urlToImage": "TEXT"
+                    }
+                ],
+                "status": "TEXT",
+                "totalResults": "INTEGER"
+            },
+            "sorting": {}
+        },
+        "/v2/top-headlines/sources": {
+            "filters": {},
+            "human_context": {
+                "description": "AI Agent Guidance: This endpoint retrieves a list of news publishers that provide top headlines. It serves as a convenience tool for users to discover available news sources, which can be filtered by category, language, or country. This is beneficial for applications that want to present users with options for selecting news sources or for understanding the landscape of available news outlets.",
+                "qa_section": {
+                    "Are there specific filters required for querying news sources?": "Filtering by category, language, and country is recommended for targeted queries to find relevant news sources.",
+                    "How does pagination affect retrieving multiple news sources?": "Pagination allows limiting results per request. Set the limit appropriately (default: 20) and use page-based pagination to navigate large datasets.",
+                    "What information can be retrieved about news sources?": "This endpoint returns details about each news source, including its ID, name, description, category, language, and country."
+                }
+            },
+            "pagination": {
+                "limit": 20,
+                "offset": true
+            },
+            "parameters": {
+                "category": {
+                    "data_type": "TEXT",
+                    "description": "Find sources that display news of this category.",
+                    "required": false,
+                    "required_format": null,
+                    "required_values": [
+                        "business",
+                        "entertainment",
+                        "general",
+                        "health",
+                        "science",
+                        "sports",
+                        "technology"
+                    ],
+                    "validation_endpoint": null
+                },
+                "country": {
+                    "data_type": "TEXT",
+                    "description": "Find sources that display news in a specific country.",
+                    "required": false,
+                    "required_format": null,
+                    "required_values": [
+                        "ae",
+                        "ar",
+                        "at",
+                        "au",
+                        "be",
+                        "bg",
+                        "br",
+                        "ca",
+                        "ch",
+                        "cn",
+                        "co",
+                        "cu",
+                        "cz",
+                        "de",
+                        "eg",
+                        "fr",
+                        "gb",
+                        "gr",
+                        "hk",
+                        "hu",
+                        "id",
+                        "ie",
+                        "il",
+                        "in",
+                        "it",
+                        "jp",
+                        "kr",
+                        "lt",
+                        "lv",
+                        "ma",
+                        "mx",
+                        "my",
+                        "ng",
+                        "nl",
+                        "no",
+                        "nz",
+                        "ph",
+                        "pl",
+                        "pt",
+                        "ro",
+                        "rs",
+                        "ru",
+                        "sa",
+                        "se",
+                        "sg",
+                        "si",
+                        "sk",
+                        "th",
+                        "tr",
+                        "tw",
+                        "ua",
+                        "us",
+                        "ve",
+                        "za"
+                    ],
+                    "validation_endpoint": null
+                },
+                "language": {
+                    "data_type": "TEXT",
+                    "description": "Find sources that display news in a specific language.",
+                    "required": false,
+                    "required_format": null,
+                    "required_values": [
+                        "ar",
+                        "de",
+                        "en",
+                        "es",
+                        "fr",
+                        "it",
+                        "nl",
+                        "no",
+                        "pt",
+                        "ru",
+                        "sv",
+                        "ud",
+                        "zh"
+                    ],
+                    "validation_endpoint": null
+                }
+            },
+            "response_format": {
+                "category": "TEXT",
+                "country": "TEXT",
+                "description": "TEXT",
+                "id": "TEXT",
+                "language": "TEXT",
+                "name": "TEXT",
+                "url": "TEXT"
+            },
+            "sorting": {}
+        }
+    },
+    "human_context": {
+        "description": "AI Agent Guidance: This API provides access to live articles from various news sources, enabling users to search and retrieve articles based on keywords, publication dates, sources, and languages. It supports sorting and filtering for effective news analysis and discovery.",
+        "qa_section": {
+            "Are there any special considerations for using this API effectively?": "To optimize your queries, use specific keywords, filter by date or source, and sort results based on relevancy or publication date. Ensure proper authentication with your API key to avoid unauthorized errors.",
+            "What services does this API provide?": "This API allows searching for articles published by numerous sources, retrieving top headlines, and accessing information about available news sources.",
+            "What types of data can be retrieved or modified?": "The API retrieves structured news article data, including titles, descriptions, authors, publication dates, and source information."
+        }
+    }
+}

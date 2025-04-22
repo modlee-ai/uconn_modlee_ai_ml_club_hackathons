@@ -1,0 +1,111 @@
+NewsData.io API Documentation
+
+This API provides access to news articles with full content from various sources worldwide. It supports searching by keywords, filtering by country, category, and language, and includes pagination features.
+
+Base URL: https://newsdata.io/api/1
+
+Endpoints:
+
+1. GET /news
+Description: Retrieves news articles based on search criteria and filters.
+Authentication: API key required as query parameter (apikey)
+
+Parameters:
+- apikey (required, string): Your API key
+  Example: "pub_7484859cf78728d0f7a914ad7cdc90a7f0796"
+  
+- q (required, string): Search query for finding relevant news articles
+  Example: "bitcoin", "climate change"
+  
+- country (optional, string): Two-letter ISO 3166-1 country code
+  Example: "us", "gb", "in"
+  Format: lowercase two-letter code
+  
+- category (optional, string): News category
+  Allowed values: "business", "entertainment", "environment", "food", "health", "politics", "science", "sports", "technology", "top", "world"
+  
+- language (optional, string): Two-letter ISO 639-1 language code
+  Example: "en", "es", "fr"
+  Format: lowercase two-letter code
+  
+- from_date (optional, string): Start date for article search
+  Format: YYYY-MM-DD
+  Example: "2024-04-09"
+  
+- to_date (optional, string): End date for article search
+  Format: YYYY-MM-DD
+  Example: "2024-04-09"
+  
+- page (optional, string): Page token for pagination
+  Format: Use the "nextPage" value from the previous response
+  Example: "eyJwYWdlIjozLCJzaXplIjoxMCwic2VhcmNoIjoiYml0Y29pbiJ9"
+  
+- size (optional, integer): Number of results per page
+  Default: 10
+  Max: 100
+
+Success Response:
+{
+    "status": "success",
+    "totalResults": <integer>,
+    "results": [
+        {
+            "title": <string>,
+            "link": <string>,
+            "keywords": [<string>],
+            "creator": [<string>],
+            "description": <string>,
+            "content": <string>,
+            "pubDate": <string>,
+            "image_url": <string>,
+            "source_id": <string>,
+            "category": [<string>],
+            "country": [<string>],
+            "language": <string>
+        }
+    ],
+    "nextPage": <string>
+}
+
+Error Response:
+{
+    "status": "error",
+    "results": {
+        "message": <string>,
+        "code": <string>
+    }
+}
+
+Example Request:
+GET /news?apikey=YOUR_API_KEY&q=tesla&language=en&category=business
+
+Example Response:
+{
+    "status": "success",
+    "totalResults": 50,
+    "results": [
+        {
+            "title": "Tesla Reports Record Sales",
+            "link": "https://example.com/tesla-news",
+            "keywords": ["tesla", "earnings", "sales"],
+            "creator": ["Jane Smith"],
+            "description": "Tesla announces record-breaking quarterly sales",
+            "content": "Full article content here with detailed information about Tesla's sales figures...",
+            "pubDate": "2024-04-09 14:30:00",
+            "image_url": "https://example.com/tesla-image.jpg",
+            "source_id": "business_news",
+            "category": ["business"],
+            "country": ["us"],
+            "language": "en"
+        }
+    ],
+    "nextPage": "eyJwYWdlIjozLCJzaXplIjoxMCwic2VhcmNoIjoiYml0Y29pbiJ9"
+}
+
+Notes:
+1. The API provides full article content in the "content" field
+2. All text parameters should be URL-encoded
+3. Date parameters must follow YYYY-MM-DD format
+4. Language and country codes must be lowercase
+5. Rate limit: 200 requests per day on free tier
+6. For pagination, use the "nextPage" token from the response instead of incrementing page numbers

@@ -46,7 +46,7 @@ We will provide:
   - Documentation for each agent
   - Sample code showing how to use them
   - Instructions for submitting your project (see below)
-
+  - Refer support [wiki](uconn_modlee_ai_ml_club_hackathons/modlee_agents_wiki.md) for more details
 ---
 
 ## 🧑‍💻 Daily Help Sessions

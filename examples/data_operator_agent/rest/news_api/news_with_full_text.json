@@ -1,0 +1,300 @@
+[
+    {
+        "status": "ok",
+        "totalResults": 28143,
+        "articles": [
+            {
+                "source": {
+                    "id": "wired",
+                    "name": "Wired"
+                },
+                "author": "Kate Yoder",
+                "title": "The US Solar Power Industry Is Trying to Rebrand as MAGA-Friendly",
+                "description": "As Donald Trump rages against renewable energy, solar power is being reimagined as a symbol of American \u201cenergy dominance.\u201d",
+                "url": "https://www.wired.com/story/the-us-solar-power-industry-is-trying-to-rebrand-as-maga-friendly/",
+                "urlToImage": "https://media.wired.com/photos/67c06ecef4badce5d2e048af/191:100/w_1280,c_limit/AP24249757893674.jpg",
+                "publishedAt": "2025-03-01T12:00:00Z",
+                "content": "This story originally appeared on Grist and is part of the Climate Desk collaboration.\r\nSeamus Fitzgerald hears a lot of opinions about solar power. As the associate director of real estate at OneEne\u2026 [+2777 chars]"
+            },
+            {
+                "source": {
+                    "id": "the-verge",
+                    "name": "The Verge"
+                },
+                "author": "Justine Calma",
+                "title": "Donald Trump wants to delete \u2018climate\u2019 from federal websites \u2014 here\u2019s how you can track the changes",
+                "description": "The Trump administration has been hacking away at federal government websites, taking down information about climate change and anything deemed \u201cwoke.\u201d Now, there\u2019s an online tool you can use to track the changes and find missing information. Researchers init\u2026",
+                "url": "https://www.theverge.com/news/623644/trump-climate-change-federal-government-website-tracker",
+                "urlToImage": "https://platform.theverge.com/wp-content/uploads/sites/2/2025/03/STK453_Privacy_D_CVirginia.jpg?quality=90&strip=all&crop=0%2C9.9676601489831%2C100%2C80.064679702034&w=1200",
+                "publishedAt": "2025-03-04T16:05:36Z",
+                "content": "This online database documents changes to climate and the environmental information on federal websites.\r\nThis online database documents changes to climate and the environmental information on federa\u2026 [+2685 chars]"
+            },
+            {
+                "source": {
+                    "id": "wired",
+                    "name": "Wired"
+                },
+                "author": "Caroline Haskins, Vittoria Elliott",
+                "title": "\u2018Startup Nation\u2019 Groups Say They\u2019re Meeting Trump Officials to Push for Deregulated \u2018Freedom Cities\u2019",
+                "description": "The architects of projects like Pr\u00f3spera are drafting legislation to create US cities that would be free from federal regulations.",
+                "url": "https://www.wired.com/story/startup-nations-donald-trump-legislation/",
+                "urlToImage": "https://media.wired.com/photos/67ca06cdcf673e42ea9cb2b0/191:100/w_1280,c_limit/Free-Cities-Deregulation-Business-1945140881.jpg",
+                "publishedAt": "2025-03-07T19:48:54Z",
+                "content": "There's so much capital and there's so much political will, but yet there's an inability to develop these technologies, says Allen. And the inability comes from lack of space and too many regulations\u2026 [+3846 chars]"
+            },
+            {
+                "source": {
+                    "id": null,
+                    "name": "Gizmodo.com"
+                },
+                "author": "Lucas Ropek",
+                "title": "Trump\u2019s AG Claims She Will Release More Epstein Docs, but They May Be Redacted for National Security",
+                "description": "The search for radical \"transparency\" isn't going so well inside the new Trump White House.",
+                "url": "https://gizmodo.com/trumps-ag-claims-she-will-release-more-epstein-docs-but-they-may-be-redacted-for-national-security-2000571431",
+                "urlToImage": "https://gizmodo.com/app/uploads/2024/11/trump-epstein-New-York-on-April-9-1997.jpg",
+                "publishedAt": "2025-03-04T21:45:44Z",
+                "content": "MAGA-world was perturbed last week when President Trump\u2019s new attorney general, Pam Bondi, claimed to have finally shed light on the mysterious case of Jeffrey Epstein but, instead, released a bunch \u2026 [+6467 chars]"
+            },
+            {
+                "source": {
+                    "id": null,
+                    "name": "Gizmodo.com"
+                },
+                "author": "AJ Dellinger",
+                "title": "Trump\u2019s FCC Head Warns EU Content Rules \u2018Incompatible\u2019 With Free Speech",
+                "description": "It's the latest warning from the Trump administration that it wants Big Tech left alone.",
+                "url": "https://gizmodo.com/trumps-fcc-head-warns-eu-content-rules-incompatible-with-free-speech-2000570843",
+                "urlToImage": "https://gizmodo.com/app/uploads/2025/03/GettyImages-1192127005.jpg",
+                "publishedAt": "2025-03-03T19:45:33Z",
+                "content": "The European Union wants social media companies like Facebook, Instagram, and X to do more to crack down on illegal content like hate speech and child sexual abuse material. The Trump administration \u2026 [+3448 chars]"
+            },
+            {
+                "source": {
+                    "id": null,
+                    "name": "Gizmodo.com"
+                },
+                "author": "Lucas Ropek",
+                "title": "Senate Votes to Strip CFPB of Ability to Regulate Platforms Like X",
+                "description": "Conservative activist and friend of Donald Trump, Laura Loomer, is freaking out.",
+                "url": "https://gizmodo.com/senate-votes-to-strip-cfpb-of-ability-to-regulate-platforms-like-x-2000572567",
+                "urlToImage": "https://gizmodo.com/app/uploads/2024/12/elon-musk-dec-5-2024-capitol-hill.jpg",
+                "publishedAt": "2025-03-06T20:30:30Z",
+                "content": "A key federal watchdog is being stripped of its power to oversee potential fraud and abuse in online payment platforms just as Elon Musk\u2019s site, X, attempts to become one.\r\nLate last year, the Consum\u2026 [+4301 chars]"
+            },
+            {
+                "source": {
+                    "id": "wired",
+                    "name": "Wired"
+                },
+                "author": "Zeyi Yang",
+                "title": "Trump Still Considering Tariffs on Taiwanese Chips, Despite $100 Billion TSMC Deal",
+                "description": "Enforcing the tariffs on Taiwan would be difficult, and they wouldn\u2019t necessarily be enough to meaningfully increase semiconductor manufacturing in the United States, experts told WIRED.",
+                "url": "https://www.wired.com/story/tsmc-tariffs-trump-impacts/",
+                "urlToImage": "https://media.wired.com/photos/67bcb1fc9109def5b360448c/191:100/w_1280,c_limit/TSMC-Chips-Tariffs-Business-2185201056.jpg",
+                "publishedAt": "2025-03-04T20:27:09Z",
+                "content": "Secondly, tariffs can only make foreign companies start producing chips in the US if it becomes cheaper than doing it somewhere else. But higher American labor costs and the countrys lack of a sophis\u2026 [+3437 chars]"
+            },
+            {
+                "source": {
+                    "id": "wired",
+                    "name": "Wired"
+                },
+                "author": "Leah Feiger, Louise Matsakis, Jake Lahut",
+                "title": "People Are Paying Millions to Dine With Donald Trump at Mar-a-Lago",
+                "description": "Business leaders are paying as much as $5,000,000 to meet one-on-one with the president at his Florida compound, sources tell WIRED, while others are paying $1,000,000 apiece to dine with him in a group setting.",
+                "url": "https://www.wired.com/story/people-paying-millions-donald-trump-mar-a-lago/",
+                "urlToImage": "https://media.wired.com/photos/67c7052b740da90b2e8bbbde/191:100/w_1280,c_limit/GettyImages-2062120626%20(1).jpg",
+                "publishedAt": "2025-03-04T16:00:23Z",
+                "content": "Guests are paying millions of dollars to dine and meet with President Donald Trump at special events held at his Mar-a-Lago estate in Palm Beach, Florida.\r\nBusiness leaders can secure a one-on-one me\u2026 [+2931 chars]"
+            },
+            {
+                "source": {
+                    "id": null,
+                    "name": "Gizmodo.com"
+                },
+                "author": "Matthew Gault",
+                "title": "Crypto Soars Then Plunges Following Trump\u2019s Post About a Strategic Reserve",
+                "description": "The Trump Pump briefly sent the prices of five cryptocurrencies soaring, but they're already coming back down to Earth.",
+                "url": "https://gizmodo.com/crypto-soars-then-plunges-following-trumps-post-about-a-strategic-reserve-2000570740",
+                "urlToImage": "https://gizmodo.com/app/uploads/2025/01/BTCBubble.jpg",
+                "publishedAt": "2025-03-03T15:10:50Z",
+                "content": "Donald Trumps touch is poison. On Sunday morning the President took to Truth Social to juice the numbers of the cryptocurrencies XRP, SOL, and ADA. He said theyd be part of the forthcoming U.S. Crypt\u2026 [+2981 chars]"
+            },
+            {
+                "source": {
+                    "id": null,
+                    "name": "Gizmodo.com"
+                },
+                "author": "AJ Dellinger",
+                "title": "Trump Backtracks on Tariffs, Exempts Automakers for Another Month",
+                "description": "This all seems extremely well thought out and planned.",
+                "url": "https://gizmodo.com/trump-backtracks-on-tariffs-exempts-automakers-for-another-month-2000572199",
+                "urlToImage": "https://gizmodo.com/app/uploads/2025/03/GettyImages-2203287073.jpg",
+                "publishedAt": "2025-03-05T21:55:44Z",
+                "content": "It seemed inevitable from the moment Donald Trump announced his sweeping 25% tariffs on all imports from Mexico and Canada that the carveouts would come. One day into the attempt to inflict pain on s\u2026 [+2920 chars]"
+            },
+            {
+                "source": {
+                    "id": null,
+                    "name": "BBC News"
+                },
+                "author": null,
+                "title": "In the US, DEI is under attack. But under a different name, it might live on",
+                "description": "Donald Trump has promised to \"terminate\" diversity programmes. But a rebrand might yet save them.",
+                "url": "https://www.bbc.com/news/articles/c24110m30ddo",
+                "urlToImage": "https://ichef.bbci.co.uk/news/1024/branded_news/7ab8/live/bfc31930-f5d8-11ef-8c03-7dfdbeeb2526.png",
+                "publishedAt": "2025-03-02T01:13:19Z",
+                "content": "In Union County, South Carolina, the sprawling cotton mills that once put bread on the table for many are long gone. Union is also what is termed a \"food desert\", where many residents live far from t\u2026 [+14640 chars]"
+            },
+            {
+                "source": {
+                    "id": null,
+                    "name": "BBC News"
+                },
+                "author": null,
+                "title": "Representative Al Green is removed from chamber during Trump address",
+                "description": "Green is a fierce critic of Donald Trump, and has previously called for his impeachment.",
+                "url": "https://www.bbc.com/news/articles/c5y07glyge3o",
+                "urlToImage": "https://ichef.bbci.co.uk/news/1024/branded_news/462e/live/960db680-f96c-11ef-896e-d7e7fb1719a4.jpg",
+                "publishedAt": "2025-03-05T03:01:08Z",
+                "content": "Representative Al Green was ejected from the House chamber for heckling President Donald Trump during his joint address to Congress on Tuesday night.\r\nGreen, a Democratic lawmaker from Houston in Tex\u2026 [+393 chars]"
+            },
+            {
+                "source": {
+                    "id": null,
+                    "name": "BBC News"
+                },
+                "author": null,
+                "title": "'This is a catastrophe': Ukraine reacts to US military aid pause",
+                "description": "One Ukrainian politician urged Trump \"not to play with these dangerous issues because we're talking about lives\".",
+                "url": "https://www.bbc.com/news/articles/cwydq82e7r1o",
+                "urlToImage": "https://ichef.bbci.co.uk/news/1024/branded_news/ff09/live/da0646c0-f8dd-11ef-9628-add78e51db09.jpg",
+                "publishedAt": "2025-03-04T10:10:20Z",
+                "content": "Hafsa Khalil\r\nJames Waterhouse\r\nUkrainians have voiced their shock and dismay at the US pausing its military aid to the country - what one politician called a \"dangerous\" situation.\r\n\"We'll see very \u2026 [+3296 chars]"
+            },
+            {
+                "source": {
+                    "id": null,
+                    "name": "BBC News"
+                },
+                "author": null,
+                "title": "Starmer praised for statesman role abroad but can he turn things round at home?",
+                "description": "The PM seizes the spotlight as Trump upends the world order - but he faces serious challenges in the UK.",
+                "url": "https://www.bbc.com/news/articles/cyvend06zmlo",
+                "urlToImage": "https://ichef.bbci.co.uk/news/1024/branded_news/1091/live/b9355400-fb75-11ef-8c03-7dfdbeeb2526.png",
+                "publishedAt": "2025-03-08T14:26:47Z",
+                "content": "\"Trump may be the best thing to happen to Starmer,\" says a diplomat, suggesting the brash property tycoon busy upending the world order might be just what the strait-laced prime minister - who's been\u2026 [+9733 chars]"
+            },
+            {
+                "source": {
+                    "id": null,
+                    "name": "BBC News"
+                },
+                "author": null,
+                "title": "Trump 'strongly considering' large-scale sanctions and tariffs on Russia",
+                "description": "The president has reversed US policy and says he trusts Putin and finds dealing with Ukraine difficult.",
+                "url": "https://www.bbc.com/news/articles/c36wkpy3497o",
+                "urlToImage": "https://ichef.bbci.co.uk/news/1024/branded_news/4602/live/7d2554d0-fb87-11ef-8c03-7dfdbeeb2526.jpg",
+                "publishedAt": "2025-03-07T19:14:20Z",
+                "content": "US President Donald Trump has said he is \"strongly considering large-scale sanctions\" and tariffs on Russia until a ceasefire and peace deal with Ukraine is reached.\r\nTrump said he was contemplating \u2026 [+3082 chars]"
+            },
+            {
+                "source": {
+                    "id": "the-verge",
+                    "name": "The Verge"
+                },
+                "author": "Lauren Feiner",
+                "title": "CFPB staff and leaders clash about whether they\u2019re allowed to work",
+                "description": "Leadership and staff at the Consumer Financial Protection Bureau (CFPB) are clashing in court over whether the Trump administration is seeking to wind down the agency and if it has allowed workers to continue their legally required duties. Now, a key agency e\u2026",
+                "url": "https://www.theverge.com/news/623748/cfpb-nteu-lawsuit-doge",
+                "urlToImage": "https://platform.theverge.com/wp-content/uploads/sites/2/2025/03/gettyimages-2202563212.jpg?quality=90&strip=all&crop=0%2C10.732984293194%2C100%2C78.534031413613&w=1200",
+                "publishedAt": "2025-03-04T14:56:38Z",
+                "content": "Demonstrators protest against cuts to the Consumer Financial Protection Bureau (CFPB) by US President Donald Trump and Elon Musk\u2019s DOGE initiative. | Image: AFP via Getty Images\r\n\n\nLeadership and sta\u2026 [+6178 chars]"
+            },
+            {
+                "source": {
+                    "id": "the-verge",
+                    "name": "The Verge"
+                },
+                "author": "Andrew J. Hawkins",
+                "title": "Car prices expected to increase by as much as $12,000 thanks to Trump\u2019s tariffs",
+                "description": "Car prices are already at record highs, and President Donald Trump\u2019s tariffs \u2014\u00a0if they stay in place \u2014\u00a0could send them into the stratosphere. The situation remains extremely fluid, with Trump administration officials today announcing a one-month reprieve for \u2026",
+                "url": "https://www.theverge.com/news/624812/trump-tariff-car-price-increase-production-cut",
+                "urlToImage": "https://platform.theverge.com/wp-content/uploads/sites/2/2025/02/STKS488_TARIFFS_ADOBESTOCK_D.jpg?quality=90&strip=all&crop=0%2C10.732984293194%2C100%2C78.534031413613&w=1200",
+                "publishedAt": "2025-03-05T19:28:44Z",
+                "content": "The one-month pause is in effect, but most experts agree that tariffs on Canada and Mexico will send car prices skyrocketing. Some models could disappear altogether.\r\nThe one-month pause is in effect\u2026 [+4477 chars]"
+            },
+            {
+                "source": {
+                    "id": "the-verge",
+                    "name": "The Verge"
+                },
+                "author": "Emma Roth",
+                "title": "TSMC announces $100 billion investment in US chipmaking",
+                "description": "Taiwan Semiconductor Manufacturing Co. \u2013 the world\u2019s biggest chipmaker \u2013 will invest at least $100 billion to expand chip manufacturing in the US. During a press conference on Monday, President Donald Trump said the funding would go toward building two additi\u2026",
+                "url": "https://www.theverge.com/news/623335/tsmc-chip-factories-100-billion-trump",
+                "urlToImage": "https://platform.theverge.com/wp-content/uploads/sites/2/2025/03/acastro_210430_1777_semiCon_0001.jpg?quality=90&strip=all&crop=0%2C10.732984293194%2C100%2C78.534031413613&w=1200",
+                "publishedAt": "2025-03-03T21:23:11Z",
+                "content": "TSMC will build two new chip factories in addition to the three it announced previously.\r\nTSMC will build two new chip factories in addition to the three it announced previously.\r\nTaiwan Semiconducto\u2026 [+1731 chars]"
+            },
+            {
+                "source": {
+                    "id": null,
+                    "name": "BBC News"
+                },
+                "author": null,
+                "title": "'America is back': Watch highlights from Trump's speech",
+                "description": "Trump touted many of his executive actions, praised Musk for his work with Doge and named a teenager a Secret Service agent.",
+                "url": "https://www.bbc.com/news/videos/c0jg4vgyvx0o",
+                "urlToImage": "https://ichef.bbci.co.uk/news/1024/branded_news/69ff/live/62c0e620-f99f-11ef-8c03-7dfdbeeb2526.jpg",
+                "publishedAt": "2025-03-05T04:42:57Z",
+                "content": "US President Donald Trump addressed a joint session of Congress six weeks after beginning his second term in office. \r\nIn addition to listing his achievements while in office, he made a teenager a US\u2026 [+182 chars]"
+            }
+        ]
+    },
+    {
+        "status": "ok",
+        "totalResults": 3,
+        "articles": [
+            {
+                "source": {
+                    "id": "abc-news",
+                    "name": "ABC News"
+                },
+                "author": "ABC News",
+                "title": "US 'just about' ready to lift Ukraine intel freeze, Trump says ahead of Saudi meet - ABC News",
+                "description": null,
+                "url": "https://abcnews.go.com/International/us-lifts-ukraine-intel-freeze-trump-ahead-saudi/story?id\\\\u003d119624605",
+                "urlToImage": null,
+                "publishedAt": "2025-03-10T08:25:30Z",
+                "content": null
+            },
+            {
+                "source": {
+                    "id": null,
+                    "name": "BBC News"
+                },
+                "author": null,
+                "title": "Trump says US economy in 'transition' as trade war escalates - BBC.com",
+                "description": "New retaliatory tariffs from China targeting some US farm products came into effect on Monday.",
+                "url": "https://www.bbc.com/news/articles/cz61nn99eg1o",
+                "urlToImage": "https://ichef.bbci.co.uk/news/1024/branded_news/1251/live/d7fca240-fd4a-11ef-a555-336cd2341958.jpg",
+                "publishedAt": "2025-03-10T07:58:54Z",
+                "content": "Jo\u00e3o da SilvaBusiness reporter, BBC News\r\nNew tit-for-tat tariffs from China, which target some US farm products, came into effect on Monday\r\nUS President Donald Trump has refused to say whether the \u2026 [+3152 chars]"
+            },
+            {
+                "source": {
+                    "id": null,
+                    "name": "PBS"
+                },
+                "author": null,
+                "title": "Secret Service shot armed man near White House while Trump out of town, authorities say - PBS NewsHour",
+                "description": "No one else was injured in the shooting that happened around midnight about a block from the White House, according to a Secret Service statement. President Donald Trump was in Florida at the time of the shooting.",
+                "url": "https://www.pbs.org/newshour/politics/secret-service-shot-armed-man-near-white-house-while-trump-out-of-town-authorities-say",
+                "urlToImage": "https://d3i6fh83elv35t.cloudfront.net/static/2025/03/2025-03-09T134324Z_1905697392_RC2P9DAPOUPF_RTRMADP_3_USA-SECURITY-1024x683.jpg",
+                "publishedAt": "2025-03-09T18:09:16Z",
+                "content": "WASHINGTON (AP) An armed man believed to be traveling from Indiana was shot by U.S. Secret Service agents near the White House after a confrontation early Sunday, according to authorities.\r\nNo one el\u2026 [+827 chars]"
+            }
+        ]
+    }
+]
