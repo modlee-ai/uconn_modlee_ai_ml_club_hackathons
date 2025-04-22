@@ -1,0 +1,2233 @@
+About the Places API (New) 
+
+bookmark_border
+ 
+The Places API (New) includes the following APIs:
+
+Place Details (New)
+Place Photo (New)
+Nearby Search (New)
+Text Search (New)
+Autocomplete (New)
+This document contains an overview of these new APIs.
+
+Place Details (New)
+A place ID uniquely identifies a place in the Google Places database and on Google Maps. With a place ID, you can request details about a particular establishment or point of interest by initiating a Place Details (New) request. A Place Details (New) request returns comprehensive information about the indicated place such as its complete address, phone number, user rating, and reviews.
+
+Note: You can get the same details about a place from Place Details (New) that you can also get from Text Search (New) or Nearby Search (New). However, if you already have the place ID of a location, calling Place Details (New) is less expensive than calling one of the search APIs.
+There are many ways to obtain a place ID. You can use:
+
+Text Search (New)
+Nearby Search (New)
+Geocoding API
+Routes API
+Address Validation API
+Place Autocomplete
+Place Photo (New)
+The Place Photo (New) API lets you add high quality photographic content to your application by giving you access to the millions of photos stored in the Google Places database. Using the Place Photo (New) API, you can access the photos and resize the image to the optimal size for your application.
+
+All requests to the Place Photo (New) API must include a photo resource name, which uniquely identifies the photo to return. You can obtain the photo resource name by using:
+
+Place Details (New)
+Text Search (New)
+Nearby Search (New)
+To include the photo resource name in the response from a Place Details (New), Text Search (New), or Nearby Search (New) request, make sure that you include the photos field in the field mask of the request.
+
+Text Search (New) and Nearby Search (New)
+The Places API includes two search APIs:
+
+Text Search (New)
+
+Lets you specify a text string on which to search for a place. For example: "Spicy Vegetarian Food in Sydney, Australia" or "Fine seafood dining near Palo Alto, CA".
+
+You can refine the search by specifying details such as price levels, current opening status, ratings, or specific place types. You can also specify to bias the results to a specific location, or restrict the search to a specific location.
+
+Nearby Search (New)
+
+Lets you specify a region to search along with a list of place types. Specify the region as a circle defined by the latitude and longitude coordinates of the center point and radius in meters.
+
+Specify one or more place types that define the characteristics of the place. For example, specify "pizza_restaurant" and "shopping_mall" to search for a pizza restaurant located in a shopping mall in the specified region.
+
+The main difference between the two searches is that Text Search (New) lets you specify an arbitrary search string while Nearby Search (New) requires a specific area in which to search.
+
+Autocomplete (New) and session tokens
+Autocomplete (New) is a web service that returns place predictions and query predictions in response to an HTTP request. In the request, specify a text search string and geographic bounds that controls the search area.
+
+Session tokens are user-generated strings that track Autocomplete (New) calls as sessions. Autocomplete (New) uses session tokens to group the query and selection phases of a user autocomplete search into a discrete session for billing purposes.
+
+New fields, attributes, and accessibility options
+The Places API (New) includes new fields, attributes, and accessibility options to provide users with more information about a place. These aspects are described in the following sections.
+
+Fields
+The Places API (New) includes several new fields:
+
+Field	Description
+regularSecondaryOpeningHours	Describes particular times for certain operations. Secondary opening hours are different from a business's main hours. For example, a restaurant can specify drive through hours or delivery hours as its secondary hours.
+paymentOptions	Payment options the place accepts. A place can accept more than one payment option. If payment option data is not available, the payment option field will be unset. Options include the following:
+Credit card
+Debit card
+Cash only
+NFC payment
+parkingOptions	Parking options provided by the place. Options include the following:
+Free parking lots
+Paid parking lots
+Free street parking
+Valet parking
+Free garage parking
+Paid garage parking
+subDestinations	Unique places that are related to a particular place. For example, airport terminals are considered sub-destinations of an airport.
+fuelOptions	The most recent information about fuel options available at a gas station. This information is updated regularly. Options include the following:
+Diesel
+Regular unleaded
+Midgrade
+Premium
+SP91
+SP91 E10
+SP92
+SP95 E10
+SP98
+SP99
+SP100
+LPG
+E80
+E85
+Methane
+Biodiesel
+Truck diesel
+evChargeOptions	Number of electric vehicle (EV) chargers at this station. While some EV chargers have multiple connectors, each charger can only charge one vehicle at a time; as a result, this field reflects the number of available EV chargers at a given time.
+shortFormattedAddress	A short, human-readable address for a place.
+primaryType	The primary type of the given result. For example, a place may be classified as a cafe or an airport. A place can only have a single primary type. For the complete list of possible values, see Supported types.
+primaryTypeDisplayName	The display name of the primary type, localized to the request language if applicable. For the complete list of possible values, see Supported types.
+Attributes
+The Places API (New) includes several new attributes:
+
+Attribute	Description
+outdoorSeating	Place provides outdoor seating.
+liveMusic	Place provides live music.
+menuForChildren	Place has a children's menu.
+servesCocktails	Place serves cocktails.
+servesDessert	Place serves dessert.
+servesCoffee	Place serves coffee.
+goodForChildren	Place is good for children.
+allowsDogs	Place allows dogs.
+restroom	Place has a restroom.
+goodForGroups	Place accommodates groups.
+goodForWatchingSports	Place is suitable for watching sports.
+Accessibility options
+The Places API (New) includes the following accessibility option fields:
+
+Field	Description
+wheelchairAccessibleParking	Place offers wheelchair-accessible parking.
+wheelchairAccessibleEntrance	Place has a wheelchair-accessible entrance.
+wheelchairAccessibleRestroom	Place has a wheelchair-accessible restroom.
+wheelchairAccessibleSeating	Place has wheelchair-accessible seating.
+
+
+Nearby Search (New) 
+
+bookmark_border
+ 
+Select platform: Android iOS JavaScript Web Service
+A Nearby Search (New) request takes one or more place types, and returns a list of matching places within the specified area. A field mask specifying one or more data types is required. Nearby Search (New) only supports POST requests.
+
+The APIs Explorer lets you make live requests so that you can get familiar with the API and the API options:
+
+Try it!
+Try the interactive demo to see Nearby Search (New) results displayed on a map.
+
+Nearby Search (New) requests
+A Nearby Search (New) request is an HTTP POST request to a URL in the form:
+
+
+https://places.googleapis.com/v1/places:searchNearby
+Pass all parameters in the JSON request body or in headers as part of the POST request. For example:
+
+
+curl -X POST -d '{
+  "includedTypes": ["restaurant"],
+  "maxResultCount": 10,
+  "locationRestriction": {
+    "circle": {
+      "center": {
+        "latitude": 37.7937,
+        "longitude": -122.3965},
+      "radius": 500.0
+    }
+  }
+}' \
+-H 'Content-Type: application/json' -H "X-Goog-Api-Key: API_KEY" \
+-H "X-Goog-FieldMask: places.displayName" \
+https://places.googleapis.com/v1/places:searchNearby
+Nearby Search (New) responses
+Nearby Search (New) returns a JSON object as a response. In the response:
+
+The places array contains all matching places.
+Each place in the array is represented by a Place object. The Place object contains detailed information about a single place.
+The FieldMask passed in the request specifies the list of fields returned in the Place object.
+The complete JSON object is in the form:
+
+
+{
+  "places": [
+    {
+      object (Place)
+    }
+  ]
+}
+Required parameters
+FieldMask
+Specify the list of fields to return in the response by creating a response field mask. Pass the response field mask to the method by using the URL parameter $fields or fields, or by using the HTTP header X-Goog-FieldMask. There is no default list of returned fields in the response. If you omit the field mask, the method returns an error.
+
+Field masking is a good design practice to ensure that you don't request unnecessary data, which helps to avoid unnecessary processing time and billing charges.
+
+Specify a comma-separated list of place data types to return. For example, to retrieve the display name and the address of the place.
+
+
+X-Goog-FieldMask: places.displayName,places.formattedAddress
+Note: Spaces are not allowed anywhere in the field list.
+Use * to retrieve all fields.
+
+
+X-Goog-FieldMask: *
+Wildcard "*" selects all fields. However, while that wildcard is fine to use in development, Google discourage the use of the wildcard (*) response field mask in production because of the large amount of data that can be returned.
+Further guidance for using places.iconMaskBaseUri and places.iconBackgroundColor can be found in Place Icons section.
+Specify one or more of the following fields:
+
+The following fields trigger the Nearby Search Pro SKU:
+
+places.accessibilityOptions
+places.addressComponents
+places.adrFormatAddress
+places.attributions
+places.businessStatus
+places.containingPlaces
+places.displayName
+places.formattedAddress
+places.googleMapsLinks*
+places.googleMapsUri
+places.iconBackgroundColor
+places.iconMaskBaseUri
+places.id
+places.location
+places.name**
+places.photos
+places.plusCode
+places.primaryType
+places.primaryTypeDisplayName
+places.pureServiceAreaBusiness
+places.shortFormattedAddress
+places.subDestinations
+places.types
+places.utcOffsetMinutes
+places.viewport
+
+* The places.googleMapsLinks field is in the pre-GA Preview stage and there is no charge, meaning billing is $0, for usage during Preview.
+
+** The places.name field contains the place resource name in the form: places/PLACE_ID. Use places.displayName to access the text name of the place.
+
+The following fields trigger the Nearby Search Enterprise SKU:
+
+places.currentOpeningHours
+places.currentSecondaryOpeningHours
+places.internationalPhoneNumber
+places.nationalPhoneNumber
+places.priceLevel
+places.priceRange
+places.rating
+places.regularOpeningHours
+places.regularSecondaryOpeningHours
+places.userRatingCount
+places.websiteUri
+
+The following fields trigger the Nearby Search Enterprise Plus SKU:
+
+places.allowsDogs
+places.curbsidePickup
+places.delivery
+places.dineIn
+places.editorialSummary
+places.evChargeOptions
+places.fuelOptions
+places.goodForChildren
+places.goodForGroups
+places.goodForWatchingSports
+places.liveMusic
+places.menuForChildren
+places.parkingOptions
+places.paymentOptions
+places.outdoorSeating
+places.reservable
+places.restroom
+places.reviews
+places.routingSummaries*
+places.servesBeer
+places.servesBreakfast
+places.servesBrunch
+places.servesCocktails
+places.servesCoffee
+places.servesDessert
+places.servesDinner
+places.servesLunch
+places.servesVegetarianFood
+places.servesWine
+places.takeout
+
+* Text Search and Nearby Search only
+
+locationRestriction
+The region to search specified as a circle, defined by center point and radius in meters. The radius must be between 0.0 and 50000.0, inclusive. The default radius is 0.0. You must set it in your request to a value greater than 0.0.
+
+For example:
+
+
+"locationRestriction": {
+  "circle": {
+    "center": {
+      "latitude": 37.7937,
+      "longitude": -122.3965
+    },
+    "radius": 500.0
+  }
+}
+Optional parameters
+includedTypes/excludedTypes, includedPrimaryTypes/excludedPrimaryTypes
+Lets you specify a list of types from types Table A used to filter the search results. Up to 50 types can be specified in each type restriction category.
+
+Note: The values in Table B are only returned in the response. You cannot use values in Table B as a filter.
+A place can only have a single primary type from types Table A associated with it. For example, the primary type might be "mexican_restaurant" or "steak_house". Use includedPrimaryTypes and excludedPrimaryTypes to filter the results on a place's primary type.
+
+A place can also have multiple type values from types Table A associated with it. For example a restaurant might have the following types: "seafood_restaurant", "restaurant", "food", "point_of_interest", "establishment". Use includedTypes and excludedTypes to filter the results on the list of types associated with a place.
+
+When you specify a general primary type, such as "restaurant" or "hotel", the response can contain places with a more specific primary type than the one specified. For example, you specify to include a primary type of "restaurant". The response can then contain places with a primary type of "restaurant", but the response can also contain places with a more specific primary type, such as "chinese_restaurant" or "seafood_restaurant".
+
+If a search is specified with multiple type restrictions, only places that satisfy all of the restrictions are returned. For example, if you specify {"includedTypes": ["restaurant"], "excludedPrimaryTypes": ["steak_house"]}, the returned places provide "restaurant" related services but do not operate primarily as a "steak_house".
+
+If you omit includedTypes, excludedTypes, includedPrimaryTypes, and excludedPrimaryTypes from the request, the search returns places for all types from within the location restriction bounds.
+includedTypes
+A comma-separated list of the place types from Table A to search for. If this parameter is omitted, places of all types are returned.
+
+excludedTypes
+A comma-separated list of place types from Table A to exclude from a search.
+
+If you specify both the includedTypes ( such as "school") and the excludedTypes (such as "primary_school") in the request, then the response includes places that are categorized as "school" but not as "primary_school". The response includes places that match at least one of the includedTypes and none of the excludedTypes.
+
+If there are any conflicting types, such as a type appearing in both includedTypes and excludedTypes, an INVALID_REQUEST error is returned.
+
+includedPrimaryTypes
+A comma-separated list of primary place types from Table A to include in a search.
+
+excludedPrimaryTypes
+A comma-separated list of primary place types from Table A to exclude from a search.
+
+If there are any conflicting primary types, such as a type appearing in both includedPrimaryTypes and excludedPrimaryTypes, an INVALID_ARGUMENT error is returned.
+
+languageCode
+The language in which to return results.
+
+See the list of supported languages. Google often updates the supported languages, so this list may not be exhaustive.
+If languageCode is not supplied, the API defaults to en. If you specify an invalid language code, the API returns an INVALID_ARGUMENT error.
+The API does its best to provide a street address that is readable for both the user and locals. To achieve that goal, it returns street addresses in the local language, transliterated to a script readable by the user if necessary, observing the preferred language. All other addresses are returned in the preferred language. Address components are all returned in the same language, which is chosen from the first component.
+If a name is not available in the preferred language, the API uses the closest match.
+The preferred language has a small influence on the set of results that the API chooses to return, and the order in which they are returned. The geocoder interprets abbreviations differently depending on language, such as the abbreviations for street types, or synonyms that may be valid in one language but not in another.
+maxResultCount
+Specifies the maximum number of place results to return. Must be between 1 and 20 (default) inclusive.
+
+rankPreference
+The type of ranking to use. If this parameter is omitted, results are ranked by popularity. May be one of the following:
+
+POPULARITY (default) Sorts results based on their popularity.
+DISTANCE Sorts results in ascending order by their distance from the specified location.
+regionCode
+The region code used to format the response, specified as a two-character CLDR code value. There is no default value.
+
+If the country name of the formattedAddress field in the response matches the regionCode, the country code is omitted from formattedAddress. This parameter has no effect on adrFormatAddress, which always includes the country name, or on shortFormattedAddress, which never includes it.
+
+Most CLDR codes are identical to ISO 3166-1 codes, with some notable exceptions. For example, the United Kingdom's ccTLD is "uk" (.co.uk) while its ISO 3166-1 code is "gb" (technically for the entity of "The United Kingdom of Great Britain and Northern Ireland"). The parameter can affect results based on applicable law.
+
+Nearby Search (New) examples
+Find places of one type
+The following example shows a Nearby Search (New) request for the display names of all restaurants within a 500-meter radius, defined by circle:
+
+
+curl -X POST -d '{
+  "includedTypes": ["restaurant"],
+  "maxResultCount": 10,
+  "locationRestriction": {
+    "circle": {
+      "center": {
+        "latitude": 37.7937,
+        "longitude": -122.3965},
+      "radius": 500.0
+    }
+  }
+}' \
+-H 'Content-Type: application/json' -H "X-Goog-Api-Key: API_KEY" \
+-H "X-Goog-FieldMask: places.displayName" \
+https://places.googleapis.com/v1/places:searchNearby
+Note that the X-Goog-FieldMask header specifies that the response contains the following data fields: places.displayName. The response is then in the form:
+
+
+{
+  "places": [
+    {
+      "displayName": {
+        "text": "La Mar Cocina Peruana",
+        "languageCode": "en"
+      }
+    },
+    {
+      "displayName": {
+        "text": "Kokkari Estiatorio",
+        "languageCode": "en"
+      }
+    },
+    {
+      "displayName": {
+        "text": "Harborview Restaurant & Bar",
+        "languageCode": "en"
+      }
+    },
+...
+}
+Add more data types to the field mask to return additional information. For example, add places.formattedAddress,places.types,places.websiteUri to include the restaurant address, type, and Web address in the response:
+
+
+curl -X POST -d '{
+  "includedTypes": ["restaurant"],
+  "maxResultCount": 10,
+  "locationRestriction": {
+    "circle": {
+      "center": {
+        "latitude": 37.7937,
+        "longitude": -122.3965},
+      "radius": 500.0
+    }
+  }
+}' \
+-H 'Content-Type: application/json' -H "X-Goog-Api-Key: API_KEY" \
+-H "X-Goog-FieldMask: places.displayName,places.formattedAddress,places.types,places.websiteUri" \
+https://places.googleapis.com/v1/places:searchNearby
+The response is now in the form:
+
+
+{
+  "places": [
+    {
+      "types": [
+        "seafood_restaurant",
+        "restaurant",
+        "food",
+        "point_of_interest",
+        "establishment"
+      ],
+      "formattedAddress": "PIER 1 1/2 The Embarcadero N, San Francisco, CA 94105, USA",
+      "websiteUri": "http://lamarsf.com/",
+      "displayName": {
+        "text": "La Mar Cocina Peruana",
+        "languageCode": "en"
+      }
+    },
+    {
+      "types": [
+        "greek_restaurant",
+        "meal_takeaway",
+        "restaurant",
+        "food",
+        "point_of_interest",
+        "establishment"
+      ],
+      "formattedAddress": "200 Jackson St, San Francisco, CA 94111, USA",
+      "websiteUri": "https://kokkari.com/",
+      "displayName": {
+        "text": "Kokkari Estiatorio",
+        "languageCode": "en"
+      }
+    },
+...
+}
+Find places of multiple types
+The following example shows a Nearby Search (New) request for the display names of all convenience stores and liquor stores within a 1000-meter radius of the specified circle:
+
+
+curl -X POST -d '{
+  "includedTypes": ["liquor_store", "convenience_store"],
+  "maxResultCount": 10,
+  "locationRestriction": {
+    "circle": {
+      "center": {
+        "latitude": 37.7937,
+        "longitude": -122.3965
+      },
+      "radius": 1000.0
+    }
+  }
+}' \
+-H 'Content-Type: application/json' -H "X-Goog-Api-Key: API_KEY" \
+-H "X-Goog-FieldMask: places.displayName,places.primaryType,places.types" \
+https://places.googleapis.com/v1/places:searchNearby
+This example adds places.primaryType and places.types to the field mask so that the response includes type information about each place, making it easier to select the appropriate place from the results.
+Exclude a place type from a search
+The following example shows a Nearby Search (New) request for all places of type "school", excluding all places of type "primary_school", ranking the results by distance:
+
+
+curl -X POST -d '{
+  "includedTypes": ["school"],
+  "excludedTypes": ["primary_school"],
+  "maxResultCount": 10,
+  "locationRestriction": {
+    "circle": {
+      "center": {
+        "latitude": 37.7937,
+        "longitude": -122.3965
+      },
+      "radius": 1000.0
+    }
+  },
+  "rankPreference": "DISTANCE"
+}' \
+-H 'Content-Type: application/json' -H "X-Goog-Api-Key: API_KEY" \
+-H "X-Goog-FieldMask: places.displayName" \
+https://places.googleapis.com/v1/places:searchNearby
+Search for all places near an area, ranking by distance
+The following example shows a Nearby Search (New) request for places near a point in downtown San Francisco. In this example, you include the rankPreference parameter to rank the results by distance:
+
+
+curl -X POST -d '{
+  "maxResultCount": 10,
+  "rankPreference": "DISTANCE",
+  "locationRestriction": {
+    "circle": {
+      "center": {
+        "latitude": 37.7937,
+        "longitude": -122.3965
+      },
+      "radius": 1000.0
+    }
+  }
+}' \
+-H 'Content-Type: application/json' -H "X-Goog-Api-Key: API_KEY" \
+-H "X-Goog-FieldMask: places.displayName" \
+https://places.googleapis.com/v1/places:searchNearby
+
+
+Text Search (New) 
+
+bookmark_border
+ 
+Select platform: Android iOS JavaScript Web Service
+Text Search (New) returns information about a set of places based on a string — for example, "pizza in New York" or "shoe stores near Ottawa" or "123 Main Street". The service responds with a list of places matching the text string and any location bias that has been set.
+
+The service is especially useful for making ambiguous address queries in an automated system, and non-address components of the string may match businesses as well as addresses. Examples of ambiguous address queries are poorly-formatted addresses or requests that include non-address components such as business names. Requests like the first two examples in the following table may return zero results unless a location — such as region, location restriction, or location bias — is set.
+
+"10 High Street, UK" or "123 Main Street, US"	Multiple "High Street"s in the UK; multiple "Main Street"s in the US. Query doesn't return desirable results unless a location restriction is set.
+"ChainRestaurant New York"	Multiple "ChainRestaurant" locations in New York; no street address or even street name.
+"10 High Street, Escher UK" or "123 Main Street, Pleasanton US"	Only one "High Street" in the UK city of Escher; only one "Main Street" in the US city of Pleasanton CA.
+"UniqueRestaurantName New York"	Only one establishment with this name in New York; no street address needed to differentiate.
+"pizza restaurants in New York"	This query contains its location restriction, and "pizza restaurants" is a well-defined place type. It returns multiple results.
+"+1 514-670-8700"	
+This query contains a phone number. It returns multiple results for places associated with that phone number.
+
+Note: For best results when searching on a phone number, include the country code followed by a space, and set the regionCode parameter to correspond to the country code. Phone number formats vary by country and the API attempts to return a result for these different formats.
+The APIs Explorer lets you make live requests so that you can get familiar with the API and the API options:
+
+Try it!
+Text Search requests
+A Text Search request is an HTTP POST request of the following form:
+
+
+https://places.googleapis.com/v1/places:searchText
+Pass all parameters in the JSON request body or in headers as part of the POST request. For example:
+
+
+curl -X POST -d '{
+  "textQuery" : "Spicy Vegetarian Food in Sydney, Australia"
+}' \
+-H 'Content-Type: application/json' -H 'X-Goog-Api-Key: API_KEY' \
+-H 'X-Goog-FieldMask: places.displayName,places.formattedAddress,places.priceLevel' \
+'https://places.googleapis.com/v1/places:searchText'
+Text Search (New) responses
+Text Search (New) returns a JSON object as a response. In the response:
+
+The places array contains all matching places.
+Each place in the array is represented by a Place object. The Place object contains detailed information about a single place.
+The FieldMask passed in the request specifies the list of fields returned in the Place object.
+The complete JSON object is in the form:
+
+
+{
+  "places": [
+    {
+      object (Place)
+    }
+  ]
+}
+Note: Text Search (New) returns a maximum of 60 results across all pages, although this limit is subject to change.
+Required parameters
+FieldMask
+Specify the list of fields to return in the response by creating a response field mask. Pass the response field mask to the method by using the URL parameter $fields or fields, or by using the HTTP header X-Goog-FieldMask. There is no default list of returned fields in the response. If you omit the field mask, the method returns an error.
+
+Field masking is a good design practice to ensure that you don't request unnecessary data, which helps to avoid unnecessary processing time and billing charges.
+
+Specify a comma-separated list of place data types to return. For example, to retrieve the display name and the address of the place.
+
+
+X-Goog-FieldMask: places.displayName,places.formattedAddress
+Note: Spaces are not allowed anywhere in the field list.
+Use * to retrieve all fields.
+
+
+X-Goog-FieldMask: *
+Wildcard "*" selects all fields. However, while that wildcard is fine to use in development, Google discourage the use of the wildcard (*) response field mask in production because of the large amount of data that can be returned.
+Further guidance for using places.iconMaskBaseUri and places.iconBackgroundColor can be found in Place Icons section.
+Specify one or more of the following fields:
+
+The following fields trigger the Text Search Essentials ID Only SKU:
+
+places.attributions
+places.id
+places.name*
+nextPageToken
+
+* The places.name field contains the place resource name in the form: places/PLACE_ID. Use places.displayName to access the text name of the place.
+The following fields trigger the Text Search Pro SKU:
+
+places.accessibilityOptions
+places.addressComponents
+places.adrFormatAddress
+places.businessStatus
+places.containingPlaces
+places.displayName
+places.formattedAddress
+places.googleMapsLinks*
+places.googleMapsUri
+places.iconBackgroundColor
+places.iconMaskBaseUri
+places.location
+places.photos
+places.plusCode
+places.primaryType
+places.primaryTypeDisplayName
+places.pureServiceAreaBusiness
+places.shortFormattedAddress
+places.subDestinations
+places.types
+places.utcOffsetMinutes
+places.viewport
+
+* The places.googleMapsLinks field is in the pre-GA Preview stage and there is no charge, meaning billing is $0, for usage during Preview.
+The following fields trigger the Text Search Enterprise SKU:
+
+places.currentOpeningHours
+places.currentSecondaryOpeningHours
+places.internationalPhoneNumber
+places.nationalPhoneNumber
+places.priceLevel
+places.priceRange
+places.rating
+places.regularOpeningHours
+places.regularSecondaryOpeningHours
+places.userRatingCount
+places.websiteUri
+The following fields trigger the Text Search Enterprise plus SKU:
+
+places.allowsDogs
+places.curbsidePickup
+places.delivery
+places.dineIn
+places.editorialSummary
+places.evChargeOptions
+places.fuelOptions
+places.goodForChildren
+places.goodForGroups
+places.goodForWatchingSports
+places.liveMusic
+places.menuForChildren
+places.parkingOptions
+places.paymentOptions
+places.outdoorSeating
+places.reservable
+places.restroom
+places.reviews
+places.routingSummaries*
+places.servesBeer
+places.servesBreakfast
+places.servesBrunch
+places.servesCocktails
+places.servesCoffee
+places.servesDessert
+places.servesDinner
+places.servesLunch
+places.servesVegetarianFood
+places.servesWine
+places.takeout
+
+* Text Search and Nearby Search only
+textQuery
+The text string on which to search, for example: "restaurant", "123 Main Street", or "best place to visit in San Francisco". The API returns candidate matches based on this string and orders the results based on their perceived relevance.
+
+Optional parameters
+includedType
+Restricts the results to places matching the specified type defined by Table A. Only one type may be specified. For example:
+
+"includedType":"bar"
+"includedType":"pharmacy"
+Note: The values in Table B are only returned in the response. You cannot use values in Table B as a filter.
+includePureServiceAreaBusinesses
+If set to true, the response includes businesses that visit or deliver to customers directly, but don't have a physical business location. If set to false, the API returns only businesses with a physical business location.
+
+languageCode
+The language in which to return results.
+
+See the list of supported languages. Google often updates the supported languages, so this list may not be exhaustive.
+If languageCode is not supplied, the API defaults to en. If you specify an invalid language code, the API returns an INVALID_ARGUMENT error.
+The API does its best to provide a street address that is readable for both the user and locals. To achieve that goal, it returns street addresses in the local language, transliterated to a script readable by the user if necessary, observing the preferred language. All other addresses are returned in the preferred language. Address components are all returned in the same language, which is chosen from the first component.
+If a name is not available in the preferred language, the API uses the closest match.
+The preferred language has a small influence on the set of results that the API chooses to return, and the order in which they are returned. The geocoder interprets abbreviations differently depending on language, such as the abbreviations for street types, or synonyms that may be valid in one language but not in another.
+locationBias
+Specifies an area to search. This location serves as a bias which means results around the specified location can be returned, including results outside the specified area.
+
+You can specify locationRestriction or locationBias, but not both. Think of locationRestriction as specifying the region which the results must be within, and locationBias as specifying the region that the results will likely be inside or near but can be outside of the area.
+
+Note: If you omit both locationBias and locationRestriction, then the API uses IP biasing by default. With IP biasing, the API uses the device's IP address to bias the results.
+Note: The locationBias parameter can be overridden if the textQuery contains an explicit location such as Market in Barcelona. In this case, locationBias is ignored.
+Specify the region as a rectangular Viewport or as a circle.
+
+A circle is defined by center point and radius in meters. The radius must be between 0.0 and 50000.0, inclusive. The default radius is 0.0. For example:
+
+
+"locationBias": {
+  "circle": {
+    "center": {
+      "latitude": 37.7937,
+      "longitude": -122.3965
+    },
+    "radius": 500.0
+  }
+}
+A rectangle is a latitude-longitude viewport, represented as two diagonally opposite low and high points. The low point marks the southwest corner of the rectangle, and the high point represents the northeast corner of the rectangle.
+
+A viewport is considered a closed region, meaning it includes its boundary. The latitude bounds must range between -90 to 90 degrees inclusive, and the longitude bounds must range between -180 to 180 degrees inclusive:
+
+If low = high, the viewport consists of that single point.
+If low.longitude > high.longitude, the longitude range is inverted (the viewport crosses the 180 degree longitude line).
+If low.longitude = -180 degrees and high.longitude = 180 degrees, the viewport includes all longitudes.
+If low.longitude = 180 degrees and high.longitude = -180 degrees, the longitude range is empty.
+If low.latitude > high.latitude, the latitude range is empty.
+Both low and high must be populated, and the represented box cannot be empty. An empty viewport results in an error.
+
+For example, this viewport fully encloses New York City:
+
+
+"locationBias": {
+  "rectangle": {
+    "low": {
+      "latitude": 40.477398,
+      "longitude": -74.259087
+    },
+    "high": {
+      "latitude": 40.91618,
+      "longitude": -73.70018
+    }
+  }
+}
+locationRestriction
+Specifies an area to search. Results outside the specified area are not returned.
+
+Specify the region as a rectangular Viewport. For an example of defining the Viewport, see the description of locationBias.
+
+You can specify locationRestriction or locationBias, but not both. Think of locationRestriction as specifying the region which the results must be within, and locationBias as specifying the region that the results will likely be inside or near but can be outside of the area.
+
+Note: If you omit both locationBias and locationRestriction, then the API uses IP biasing by default. With IP biasing, the API uses the IP address of the device to bias the results.
+maxResultCount (deprecated)
+Deprecated: This field is deprecated in favor of pageSize. If both maxResultCount and pageSize are specified, pageSize will be used and maxResultCount will be ignored.
+Specifies the number of results (between 1 and 20) to display per page. For example, setting a maxResultCount value of 5 will return up to 5 results on the first page. If there are more results that can be returned from the query, the response includes a nextPageToken that you can pass into a subsequent request to access the next page.
+
+Note: If maxResultCount is 0 or unspecified, the API will return 20 results per page by default. If maxResultCount is greater than 20, the API will return no more than 20 results per page.
+evOptions
+Specifies parameters for identifying available electric vehicle (EV) charging connectors and charging rates.
+
+connectorTypes
+Filters by the type of EV charging connector available at a place. A place that does not support any of the connector types will be filtered out. Supported EV charging connector types include combined (AC and DC) chargers, Tesla chargers, GB/T-compliant chargers (for EV fast charging in China), and wall outlet chargers. For more information, see the reference documentation.
+
+To filter results for a specific supported connector, set connectorTypes to that value. For example, to find J1772 type 1 connectors, set connectorTypes to EV_CONNECTOR_TYPE_J1772.
+To filter results for unsupported connectors, set connectorTypes to EV_CONNECTOR_TYPE_OTHER.
+To filter results for any connector type that is a wall outlet, set connectorTypes to EV_CONNECTOR_TYPE_UNSPECIFIED_WALL_OUTLET.
+To filter results for any connector type, either set connectorTypes to EV_CONNECTOR_TYPE_UNSPECIFIED or don't set a value for connectorTypes.
+minimumChargingRateKw
+Filters places by minimum EV charging rate in kilowatts (kW). Any places with charging a rate less than the minimum charging rate are filtered out. For example, to find EV chargers with charging rates that are at least 10 kW, you can set this parameter to "10."
+
+minRating
+Restricts results to only those whose average user rating is greater than or equal to this limit. Values must be between 0.0 and 5.0 (inclusive) in increments of 0.5. For example: 0, 0.5, 1.0, ... , 5.0 inclusive. Values are rounded up to the nearest 0.5. For example, a value of 0.6 eliminates all results with a rating less than 1.0.
+
+openNow 
+If true, return only those places that are open for business at the time the query is sent. If false, return all businesses regardless of open status. Places that don't specify opening hours in the Google Places database are returned if you set this parameter to false.
+
+pageSize
+Specifies the number of results (between 1 and 20) to display per page. For example, setting a pageSize value of 5 will return up to 5 results on the first page. If there are more results that can be returned from the query, the response includes a nextPageToken that you can pass into a subsequent request to access the next page.
+
+Note: If pageSize is 0 or unspecified, the API will return 20 results per page by default. If pageSize is greater than 20, the API will return no more than 20 results per page.
+pageToken
+Specifies the nextPageToken from the response body of the previous page.
+
+priceLevels
+Restrict the search to places that are marked at certain price levels. The default is to select all price levels.
+
+Specify an array of one or more of values defined by PriceLevel.
+
+Note: PRICE_LEVEL_FREE is not allowed in a request. It is only used to populate the response.
+For example:
+
+
+"priceLevels":["PRICE_LEVEL_INEXPENSIVE", "PRICE_LEVEL_MODERATE"]
+rankPreference
+Specifies how the results are ranked in the response based on the type of query:
+
+For a categorical query such as "Restaurants in New York City", RELEVANCE (rank results by search relevance) is the default. You can set rankPreference to RELEVANCE or DISTANCE (rank results by distance).
+For a non-categorical query such as "Mountain View, CA", we recommend that you leave rankPreference unset.
+regionCode
+The region code used to format the response, specified as a two-character CLDR code value. This parameter can also have a bias effect on the search results. There is no default value.
+
+If the country name of the formattedAddress field in the response matches the regionCode, the country code is omitted from formattedAddress. This parameter has no effect on adrFormatAddress, which always includes the country name when available, or on shortFormattedAddress, which never includes it.
+
+Most CLDR codes are identical to ISO 3166-1 codes, with some notable exceptions. For example, the United Kingdom's ccTLD is "uk" (.co.uk) while its ISO 3166-1 code is "gb" (technically for the entity of "The United Kingdom of Great Britain and Northern Ireland"). The parameter can affect results based on applicable law.
+
+strictTypeFiltering
+Used with the includedType parameter. When set to true, only places that match the specified types specified by includeType are returned. When false, the default, the response can contain places that don't match the specified types.
+
+Text Search examples
+Find a place by query string
+The following example shows a Text Search request for "Spicy Vegetarian Food in Sydney, Australia":
+
+
+curl -X POST -d '{
+  "textQuery" : "Spicy Vegetarian Food in Sydney, Australia"
+}' \
+-H 'Content-Type: application/json' -H 'X-Goog-Api-Key: API_KEY' \
+-H 'X-Goog-FieldMask: places.displayName,places.formattedAddress' \
+'https://places.googleapis.com/v1/places:searchText'
+Note that the X-Goog-FieldMask header specifies that the response contains the following data fields: places.displayName,places.formattedAddress. The response is then in the form:
+
+
+{
+  "places": [
+    {
+      "formattedAddress": "367 Pitt St, Sydney NSW 2000, Australia",
+      "displayName": {
+        "text": "Mother Chu's Vegetarian Kitchen",
+        "languageCode": "en"
+      }
+    },
+    {
+      "formattedAddress": "175 First Ave, Five Dock NSW 2046, Australia",
+      "displayName": {
+        "text": "Veggo Sizzle - Vegan & Vegetarian Restaurant, Five Dock, Sydney",
+        "languageCode": "en"
+      }
+    },
+    {
+      "formattedAddress": "29 King St, Sydney NSW 2000, Australia",
+      "displayName": {
+        "text": "Peace Harmony",
+        "languageCode": "en"
+      }
+    },
+    ...
+  ]
+}
+Add more data types to the field mask to return additional information. For example, add places.types,places.websiteUri to include the restaurant type and Web address in the response:
+
+
+curl -X POST -d '{
+  "textQuery" : "Spicy Vegetarian Food in Sydney, Australia"
+}' \
+-H 'Content-Type: application/json' -H 'X-Goog-Api-Key: API_KEY' \
+-H 'X-Goog-FieldMask: places.displayName,places.formattedAddress,places.types,places.websiteUri' \
+'https://places.googleapis.com/v1/places:searchText'
+The response is now in the form:
+
+
+{
+  "places": [
+    {
+      "types": [
+        "vegetarian_restaurant",
+        "vegan_restaurant",
+        "chinese_restaurant",
+        "restaurant",
+        "food",
+        "point_of_interest",
+        "establishment"
+      ],
+      "formattedAddress": "367 Pitt St, Sydney NSW 2000, Australia",
+      "websiteUri": "http://www.motherchusvegetarian.com.au/",
+      "displayName": {
+        "text": "Mother Chu's Vegetarian Kitchen",
+        "languageCode": "en"
+      }
+    },
+    {
+      "types": [
+        "vegan_restaurant",
+        "thai_restaurant",
+        "vegetarian_restaurant",
+        "indian_restaurant",
+        "italian_restaurant",
+        "american_restaurant",
+        "restaurant",
+        "food",
+        "point_of_interest",
+        "establishment"
+      ],
+      "formattedAddress": "175 First Ave, Five Dock NSW 2046, Australia",
+      "websiteUri": "http://www.veggosizzle.com.au/",
+      "displayName": {
+        "text": "Veggo Sizzle - Vegan & Vegetarian Restaurant, Five Dock, Sydney",
+        "languageCode": "en"
+      }
+    },
+    ...
+  ]
+}
+Filter places by price level
+Use the priceLevel option to filter the results to restaurants defined as inexpensive or moderately expensive:
+
+
+curl -X POST -d '{
+  "textQuery" : "Spicy Vegetarian Food in Sydney, Australia",
+  "priceLevels":["PRICE_LEVEL_INEXPENSIVE", "PRICE_LEVEL_MODERATE"]
+}' \
+-H 'Content-Type: application/json' -H 'X-Goog-Api-Key: API_KEY' \
+-H 'X-Goog-FieldMask: places.displayName,places.formattedAddress,places.priceLevel' \
+'https://places.googleapis.com/v1/places:searchText'
+This example also uses the X-Goog-FieldMask header to add the places.priceLevel data field to the response so it is in the form:
+
+
+{
+  "places": [
+    {
+      "formattedAddress": "367 Pitt St, Sydney NSW 2000, Australia",
+      "priceLevel": "PRICE_LEVEL_MODERATE",
+      "displayName": {
+        "text": "Mother Chu's Vegetarian Kitchen",
+        "languageCode": "en"
+      }
+    },
+    {
+      "formattedAddress": "115 King St, Newtown NSW 2042, Australia",
+      "priceLevel": "PRICE_LEVEL_MODERATE",
+      "displayName": {
+        "text": "Green Mushroom",
+        "languageCode": "en"
+      }
+    },
+    ...
+  ]
+}
+Add additional options to refine your search, such as includedType, minRating, rankPreference, openNow, and other parameters described in Optional parameters.
+
+Note: These refinement parameters only apply to queries such as "Restaurants in New York City" where the parameters help to reduce the number of search results based on the specified option. Applying these parameters to other type of queries—for example, to geographical queries such as "Mountain View, CA" or "New York City"—can actually result in filtering out meaningful results or reducing the number of meaningful results.
+Restrict search to a specified area
+Use locationRestriction or locationBias, but not both, to restrict a search to an area. Think of locationRestriction as specifying the region which the results must be within, and locationBias as specifying the region that the results must be near but can be outside of the area.
+
+Note: When using locationRestriction, you can only specify the region as a rectangular Viewport. When using locationBias, you can specify the region as a rectangular Viewport or as a circle.
+Restrict area using locationRestriction
+Use the locationRestriction parameter to restrict query results to a specified region. In your request body, specify the low and high latitude and longitude values that define the region boundary.
+
+The following example shows a Text Search request for "vegetarian food" in New York City. This request only returns the first 10 results for places that are open.
+
+
+curl -X POST -d '{
+  "textQuery" : "vegetarian food",
+  "pageSize" : "10",
+  "locationRestriction": {
+    "rectangle": {
+      "low": {
+        "latitude": 40.477398,
+        "longitude": -74.259087
+      },
+      "high": {
+        "latitude": 40.91618,
+        "longitude": -73.70018
+      }
+    }
+  }
+}' \
+  -H 'Content-Type: application/json' \
+  -H 'X-Goog-Api-Key: API_KEY' \
+  -H 'X-Goog-FieldMask: places.id,places.formattedAddress' \
+  'https://places.googleapis.com/v1/places:searchText'
+Bias to an area using locationBias
+The following example shows a Text Search request for "vegetarian food" biased to a location within 500 meters of a point in downtown San Francisco. This request only returns the first 10 results for places that are open.
+
+
+curl -X POST -d '{
+  "textQuery" : "vegetarian food",
+  "openNow": true,
+  "pageSize": 10,
+  "locationBias": {
+    "circle": {
+      "center": {"latitude": 37.7937, "longitude": -122.3965},
+      "radius": 500.0
+    }
+  },
+}' \
+-H 'Content-Type: application/json' -H 'X-Goog-Api-Key: API_KEY' \
+-H 'X-Goog-FieldMask: places.displayName,places.formattedAddress' \
+'https://places.googleapis.com/v1/places:searchText'
+Search for EV chargers with a minimum charging rate
+Use minimumChargingRateKw and connectorTypes to search for places with available chargers that are compatible with your EV.
+
+The following example shows a request for Tesla and J1772 type 1 EV charging connectors with a minimum charging rate of 10 kW in Mountain View, CA. Only four results are returned.
+
+
+curl -X POST -d '{
+    "textQuery": "EV Charging Station Mountain View",
+    "pageSize": 4,
+    "evOptions": {
+      "minimumChargingRateKw": 10,
+      "connectorTypes": ["EV_CONNECTOR_TYPE_J1772","EV_CONNECTOR_TYPE_TESLA"]
+    }
+  }' \
+-H 'Content-Type: application/json' -H 'X-Goog-Api-Key: API_KEY' \
+-H "X-Goog-FieldMask: places.displayName,places.evChargeOptions" \
+'https://places.googleapis.com/v1/places:searchText'
+The request returns the following response:
+
+
+{
+  "places": [
+    {
+      "displayName": {
+        "text": "EVgo Charging Station",
+        "languageCode": "en"
+      },
+      "evChargeOptions": {
+        "connectorCount": 16,
+        "connectorAggregation": [
+          {
+            "type": "EV_CONNECTOR_TYPE_CHADEMO",
+            "maxChargeRateKw": 100,
+            "count": 8,
+            "availableCount": 5,
+            "outOfServiceCount": 0,
+            "availabilityLastUpdateTime": "2024-01-10T19:10:00Z"
+          },
+          {
+            "type": "EV_CONNECTOR_TYPE_CCS_COMBO_1",
+            "maxChargeRateKw": 100,
+            "count": 2,
+            "availableCount": 2,
+            "outOfServiceCount": 0,
+            "availabilityLastUpdateTime": "2024-01-10T19:10:00Z"
+          },
+          {
+            "type": "EV_CONNECTOR_TYPE_CCS_COMBO_1",
+            "maxChargeRateKw": 350,
+            "count": 6,
+            "availableCount": 3,
+            "outOfServiceCount": 0,
+            "availabilityLastUpdateTime": "2024-01-10T19:10:00Z"
+          }
+        ]
+      }
+    },
+    {
+      "displayName": {
+        "text": "EVgo Charging Station",
+        "languageCode": "en"
+      },
+      "evChargeOptions": {
+        "connectorCount": 6,
+        "connectorAggregation": [
+          {
+            "type": "EV_CONNECTOR_TYPE_CCS_COMBO_1",
+            "maxChargeRateKw": 100,
+            "count": 4,
+            "availableCount": 3,
+            "outOfServiceCount": 0,
+            "availabilityLastUpdateTime": "2024-01-10T19:10:00Z"
+          },
+          {
+            "type": "EV_CONNECTOR_TYPE_CCS_COMBO_1",
+            "maxChargeRateKw": 350,
+            "count": 2,
+            "availableCount": 0,
+            "outOfServiceCount": 2,
+            "availabilityLastUpdateTime": "2024-01-10T19:10:00Z"
+          }
+        ]
+      }
+    },
+    {
+      "displayName": {
+        "text": "EVgo Charging Station",
+        "languageCode": "en"
+      },
+      "evChargeOptions": {
+        "connectorCount": 5,
+        "connectorAggregation": [
+          {
+            "type": "EV_CONNECTOR_TYPE_J1772",
+            "maxChargeRateKw": 3.5999999046325684,
+            "count": 1,
+            "availableCount": 0,
+            "outOfServiceCount": 1,
+            "availabilityLastUpdateTime": "2024-01-10T19:10:00Z"
+          },
+          {
+            "type": "EV_CONNECTOR_TYPE_CHADEMO",
+            "maxChargeRateKw": 50,
+            "count": 2,
+            "availableCount": 0,
+            "outOfServiceCount": 0,
+            "availabilityLastUpdateTime": "2024-01-10T19:10:00Z"
+          },
+          {
+            "type": "EV_CONNECTOR_TYPE_CCS_COMBO_1",
+            "maxChargeRateKw": 50,
+            "count": 2,
+            "availableCount": 0,
+            "outOfServiceCount": 0,
+            "availabilityLastUpdateTime": "2024-01-10T19:10:00Z"
+          }
+        ]
+      }
+    },
+    {
+      "displayName": {
+        "text": "Electric Vehicle Charging Station",
+        "languageCode": "en"
+      },
+      "evChargeOptions": {
+        "connectorCount": 10,
+        "connectorAggregation": [
+          {
+            "type": "EV_CONNECTOR_TYPE_OTHER",
+            "maxChargeRateKw": 210,
+            "count": 10
+          }
+        ]
+      }
+    }
+  ]
+}
+Search for service area businesses
+Use the includePureServiceAreaBusinesses parameter to search for businesses without a physical service address (for example, a mobile cleaning service or a food truck).
+
+The following example shows a request for plumbers in San Francisco:
+
+
+curl -X POST -d '{
+  "textQuery" : "plumber San Francisco",
+  "includePureServiceAreaBusinesses": true
+}' \
+-H 'Content-Type: application/json' -H 'X-Goog-Api-Key: API_KEY' \
+-H 'X-Goog-FieldMask: places.displayName,places.formattedAddress' \
+'https://places.googleapis.com/v1/places:searchText'
+In the response, businesses without a physical service address don't include the formattedAddress field:
+
+
+{
+  "places": [
+    {
+      "formattedAddress": "3450 Sacramento St #204, San Francisco, CA 94118, USA",
+      "displayName": {
+        "text": "Advanced Plumbing & Drain",
+        "languageCode": "en"
+      }
+    },
+    {
+      "formattedAddress": "1455 Bancroft Ave, San Francisco, CA 94124, USA",
+      "displayName": {
+        "text": "Magic Plumbing Heating & Cooling",
+        "languageCode": "en"
+      }
+    },
+    /.../
+    {
+      "displayName": {
+        "text": "Starboy Plumbing Inc.",
+        "languageCode": "en"
+      }
+    },
+    {
+      "formattedAddress": "78 Dorman Ave, San Francisco, CA 94124, USA",
+      "displayName": {
+        "text": "Cabrillo Plumbing, Heating & Air",
+        "languageCode": "en"
+      }
+    },
+    {
+      "formattedAddress": "540 Barneveld Ave # D, San Francisco, CA 94124, USA",
+      "displayName": {
+        "text": "Mr. Rooter Plumbing of San Francisco",
+        "languageCode": "en"
+      }
+    },
+    /.../
+    {
+      "displayName": {
+        "text": "Pipeline Plumbing",
+        "languageCode": "en"
+      }
+    },
+    {
+      "formattedAddress": "350 Bay St #100-178, San Francisco, CA 94133, USA",
+      "displayName": {
+        "text": "One Source Plumbing and Rooter",
+        "languageCode": "en"
+      }
+    },
+    /.../
+  ]
+}
+Specify a number of results to return per page
+Use the pageSize parameter to specify a number of results to return per page. The nextPageToken parameter in the response body provides a token that can be used in subsequent calls to access the next page of results.
+
+The following example shows a request for "pizza in New York" limited to 5 results per page:
+
+
+ curl -X POST -d '{
+  "textQuery": "pizza in New York",
+  "pageSize": 5
+  }' \
+-H 'Content-Type: application/json' -H 'X-Goog-Api-Key: API_KEY' \
+-H "X-Goog-FieldMask: places.id,nextPageToken" \
+'https://places.googleapis.com/v1/places:searchText'
+
+{
+  "places": [
+    {
+      "id": "ChIJifIePKtZwokRVZ-UdRGkZzs"
+    },
+    {
+      "id": "ChIJPxPd_P1YwokRfzLhSiACEoU"
+    },
+    {
+      "id": "ChIJrXXKn5NZwokR78g0ipCnY60"
+    },
+    {
+      "id": "ChIJ6ySICVZYwokR9rIK8HjXhzE"
+    },
+    {
+      "id": "ChIJ6xvs94VZwokRnT1D2lX2OTw"
+    }
+  ],
+  "nextPageToken": "AeCrKXsZWzNVbPzO-MRWPu52jWO_Xx8aKwOQ69_Je3DxRpfdjClq8Ekwh3UcF2h2Jn75kL6PtWLGV4ecQri-GEUKN_OFpJkdVc-JL4Q"
+}
+To access the next page of results, use pageToken to pass in the nextPageToken in the request body:
+
+
+ curl -X POST -d '{
+  "textQuery": "pizza in New York",
+  "pageSize": 5,
+  "pageToken": "AeCrKXsZWzNVbPzO-MRWPu52jWO_Xx8aKwOQ69_Je3DxRpfdjClq8Ekwh3UcF2h2Jn75kL6PtWLGV4ecQri-GEUKN_OFpJkdVc-JL4Q"
+  }' \
+-H 'Content-Type: application/json' -H 'X-Goog-Api-Key: API_KEY' \
+-H "X-Goog-FieldMask: places.id,nextPageToken" \
+'https://places.googleapis.com/v1/places:searchText'
+
+{
+  "places": [
+    {
+      "id": "ChIJL-LN1N1ZwokR8K2jACu6Ydw"
+    },
+    {
+      "id": "ChIJjaD94kFZwokR-20CXqlpy_4"
+    },
+    {
+      "id": "ChIJ6ffdpJNZwokRmcafdROM5q0"
+    },
+    {
+      "id": "ChIJ8Q2WSpJZwokRQz-bYYgEskM"
+    },
+    {
+      "id": "ChIJ8164qwFZwokRhplkmhvq1uE"
+    }
+  ],
+  "nextPageToken": "AeCrKXvPd6uUy-oj96W2OaqEe2pUD8QTxOM8-sKfUcFsC9t2Wey5qivrKGoGSxcZnyc7RPmaFfAktslrKbUh31ZDTkL0upRmaxA7c_c"
+}
+Note: All parameters other than maxResultCount, pageSize, and pageToken must be the same as the previous request. Otherwise, the API returns an INVALID_ARGUMENT error.
+
+Place Details (New) 
+
+bookmark_border
+ 
+Select platform: Android iOS JavaScript Web Service
+Once you have a place ID, you can request more details about a particular establishment or point of interest by initiating a Place Details (New) request. A Place Details (New) request returns more comprehensive information about the indicated place such as its complete address, phone number, user rating and reviews.
+
+There are many ways to obtain a place ID. You can use:
+
+Text Search (New) or Nearby Search (New)
+Geocoding API
+Routes API
+Address Validation API
+Autocomplete (New)
+The APIs Explorer lets you make live requests so that you can get familiar with the API and the API options:
+
+Try it!
+Place Details (New) requests
+A Place Details request is an HTTP GET request in the form:
+
+
+https://places.googleapis.com/v1/places/PLACE_ID
+Pass all parameters as URL parameters or in headers as part of the GET request. For example:
+
+
+https://places.googleapis.com/v1/places/ChIJj61dQgK6j4AR4GeTYWZsKWw?fields=id,displayName&key=API_KEY
+Or in a cURL command:
+
+
+curl -X GET -H 'Content-Type: application/json' \
+-H "X-Goog-Api-Key: API_KEY" \
+-H "X-Goog-FieldMask: id,displayName" \
+https://places.googleapis.com/v1/places/ChIJj61dQgK6j4AR4GeTYWZsKWw
+Place Details (New) responses
+Place Details (New) returns a JSON object as a response. In the response:
+
+The response is represented by a Place object. The Place object contains detailed information about the place.
+The FieldMask passed in the request specifies the list of fields returned in the Place object.
+The complete JSON object is in the form:
+
+
+{
+  "name": "places/ChIJkR8FdQNB0VQRm64T_lv1g1g",
+  "id": "ChIJkR8FdQNB0VQRm64T_lv1g1g",
+  "displayName": {
+    "text": "Trinidad"
+  }
+  ...
+}
+Required parameters
+FieldMask
+Specify the list of fields to return in the response by creating a response field mask. Pass the response field mask to the method by using the URL parameter $fields or fields, or by using the HTTP header X-Goog-FieldMask. There is no default list of returned fields in the response. If you omit the field mask, the method returns an error.
+
+Field masking is a good design practice to ensure that you don't request unnecessary data, which helps to avoid unnecessary processing time and billing charges.
+
+Specify a comma-separated list of place data types to return. For example, to retrieve the display name and the address of the place.
+
+
+X-Goog-FieldMask: displayName,formattedAddress
+Note: Spaces are not allowed anywhere in the field list.
+Use * to retrieve all fields.
+
+
+X-Goog-FieldMask: *
+Wildcard "*" selects all fields. However, while that wildcard is fine to use in development, Google discourage the use of the wildcard (*) response field mask in production because of the large amount of data that can be returned.
+Further guidance for using iconMaskBaseUri and iconBackgroundColor can be found in Place Icons section.
+Specify one or more of the following fields:
+
+The following fields trigger the Place Details Essentials IDs Only SKU:
+
+attributions
+id
+name*
+photos
+
+* The name field contains the place resource name in the form: places/PLACE_ID. Use displayName to access the text name of the place.
+
+The following fields trigger the Place Details Essentials SKU:
+
+addressComponents
+adrFormatAddress
+formattedAddress
+location
+plusCode
+shortFormattedAddress
+types
+viewport
+
+The following fields trigger the Place Details Pro SKU:
+
+accessibilityOptions
+businessStatus
+containingPlaces
+displayName
+googleMapsLinks*
+googleMapsUri
+iconBackgroundColor
+iconMaskBaseUri
+primaryType
+primaryTypeDisplayName
+pureServiceAreaBusiness
+subDestinations
+utcOffsetMinutes
+
+* The googleMapsLinks field is in the pre-GA Preview stage and there is no charge, meaning billing is $0, for usage during Preview.
+
+The following fields trigger the Place Details EnterpriseSKU:
+
+currentOpeningHours
+currentSecondaryOpeningHours
+internationalPhoneNumber
+nationalPhoneNumber
+priceLevel
+priceRange
+rating
+regularOpeningHours
+regularSecondaryOpeningHours
+userRatingCount
+websiteUri
+
+The following fields trigger the Place Details Enterprise Plus SKU:
+
+allowsDogs
+curbsidePickup
+delivery
+dineIn
+editorialSummary
+evChargeOptions
+fuelOptions
+goodForChildren
+goodForGroups
+goodForWatchingSports
+liveMusic
+menuForChildren
+parkingOptions
+paymentOptions
+outdoorSeating
+reservable
+restroom
+reviews
+routingSummaries*
+servesBeer
+servesBreakfast
+servesBrunch
+servesCocktails
+servesCoffee
+servesDessert
+servesDinner
+servesLunch
+servesVegetarianFood
+servesWine
+takeout
+
+* Text Search and Nearby Search only
+
+placeId
+A textual identifier that uniquely identifies a place, returned from a Text Search (New) or Nearby Search (New). For more information about place IDs, see the place ID overview.
+
+The string places/PLACE_ID is also called the place resource name. In the response from a Place Details (New), Nearby Search (New), and Text Search (New) request, this string is contained in the name field of the response. The standalone place ID is contained in the id field of the response.
+
+Note: In the Place Details (Legacy), the name field of the response contained the human-readable name for the place. In the new API, that field is now called displayName.
+Optional parameters
+languageCode
+The language in which to return results.
+
+See the list of supported languages. Google often updates the supported languages, so this list may not be exhaustive.
+If languageCode is not supplied, the API defaults to en. If you specify an invalid language code, the API returns an INVALID_ARGUMENT error.
+The API does its best to provide a street address that is readable for both the user and locals. To achieve that goal, it returns street addresses in the local language, transliterated to a script readable by the user if necessary, observing the preferred language. All other addresses are returned in the preferred language. Address components are all returned in the same language, which is chosen from the first component.
+If a name is not available in the preferred language, the API uses the closest match.
+The preferred language has a small influence on the set of results that the API chooses to return, and the order in which they are returned. The geocoder interprets abbreviations differently depending on language, such as the abbreviations for street types, or synonyms that may be valid in one language but not in another.
+regionCode
+The region code used to format the response, specified as a two-character CLDR code value. There is no default value.
+
+If the country name of the formattedAddress field in the response matches the regionCode, the country code is omitted from formattedAddress. This parameter has no effect on adrFormatAddress, which always includes the country name, or on shortFormattedAddress, which never includes it.
+
+Most CLDR codes are identical to ISO 3166-1 codes, with some notable exceptions. For example, the United Kingdom's ccTLD is "uk" (.co.uk) while its ISO 3166-1 code is "gb" (technically for the entity of "The United Kingdom of Great Britain and Northern Ireland"). The parameter can affect results based on applicable law.
+
+sessionToken
+Session tokens are user-generated strings that track Autocomplete (New) calls as "sessions." Autocomplete (New) uses session tokens to group the query and place selection phases of a user autocomplete search into a discrete session for billing purposes. Session tokens are passed into Place Details (New) calls that follow Autocomplete (New) calls. For more information, see Session tokens.
+
+Place Details example
+The following example requests the details of a place by placeId:
+
+
+curl -X GET -H 'Content-Type: application/json' \
+-H "X-Goog-Api-Key: API_KEY" \
+-H "X-Goog-FieldMask: id,displayName" \
+https://places.googleapis.com/v1/places/ChIJj61dQgK6j4AR4GeTYWZsKWw
+Note that the X-Goog-FieldMask header specifies that the response contains the following data fields: id,displayName. The response is then in the form:
+
+
+{
+  "id": "ChIJj61dQgK6j4AR4GeTYWZsKWw",
+  "displayName": {
+    "text": "Googleplex",
+    "languageCode": "en"
+  }
+}
+Add more data types to the field mask to return additional information. For example, add formattedAddress,plusCode to include the address and Plus Code in the response:
+
+
+curl -X GET -H 'Content-Type: application/json' \
+-H "X-Goog-Api-Key: API_KEY" \
+-H "X-Goog-FieldMask: id,displayName,formattedAddress,plusCode" \
+https://places.googleapis.com/v1/places/ChIJj61dQgK6j4AR4GeTYWZsKWw
+The response is now in the form:
+
+
+{
+  "id": "ChIJj61dQgK6j4AR4GeTYWZsKWw",
+  "formattedAddress": "1600 Amphitheatre Pkwy, Mountain View, CA 94043, USA",
+  "plusCode": {
+    "globalCode": "849VCWC7+RW",
+    "compoundCode": "CWC7+RW Mountain View, CA, USA"
+  },
+  "displayName": {
+    "text": "Googleplex",
+    "languageCode": "en"
+  }
+}
+
+
+Place Photo (New) 
+
+bookmark_border
+ 
+Select platform: Android iOS Web Service
+The Place Photo (New) service is a read-only API that allows you to add high quality photographic content to your application. The Place Photo service gives you access to the millions of photos stored in the Places database.
+
+When you get place information using a Place Details, Nearby Search, or Text Search request, you can also request photo resources for relevant photographic content. Using the Photo service, you can then access the referenced photos and resize the image to the optimal size for your application.
+
+The APIs Explorer lets you make live requests so that you can get familiar with the API and the API options:
+
+Try it!
+Note: Enter the place name from the photos array of your Place Details (New) response body and click "Execute." To view the photo, use the photoUri value in the Place Photo (New) response body.
+Place Photo requests
+A Place Photo request is an HTTP GET request to a URL in the form:
+
+https://places.googleapis.com/v1/NAME/media?key=API_KEY&PARAMETERS
+Where the following parameters are required:
+
+NAME contains the resource name of the photo.
+API_KEY contains the API key.
+PARAMETERS contains either the maxHeightPx parameter, the maxWidthPx parameter, or both.
+The complete list of required and optional parameters are described below.
+
+Required parameters
+Photo name
+A string identifier that uniquely identifies a photo. Photo names are returned from a Place Details (New), Nearby Search (New), or Text Search (New) request in the name property of each element of the photos[] array.
+
+For an example, see Get a photo name.
+
+maxHeightPx and maxWidthPx
+Specifies the maximum desired height and width, in pixels, of the image. If the image is smaller than the values specified, the original image will be returned. If the image is larger in either dimension, it will be scaled to match the smaller of the two dimensions, restricted to its original aspect ratio. Both the maxheight and maxwidth properties accept an integer between 1 and 4800.
+
+You must specify either maxHeightPx, or maxWidthPx, or both.
+
+Optional parameters
+skipHttpRedirect
+If false (default), make an HTTP redirect to the image to return the image. If true, skip the redirect and return a JSON response containing the image details. For example:
+
+
+{
+  "name": "places/ChIJj61dQgK6j4AR4GeTYWZsKWw/photos/Aaw_FcKly0DEv3EWmDJyHiEqXIP5mowOc99lN1GzBun6KHH52AZ5fFA/media",
+  "photoUri": "https://lh3.googleusercontent.com/a-/AD_cFT-b=s100-p-k-no-mo"
+}
+This option is ignored for non-HTTP requests.
+
+Get a photo name
+All requests to the Place Photo service must include a photo resource name, returned in the response to a Nearby Search, Text Search, or Place Details request. The response to these requests contains a photos[] array if the place has related photographic content.
+
+Note: To include the photos[] array in the response, make sure to include photos (Place Details) or places.photos (Nearby Search and Text Search) in the field mask of the request. Each API can return up to 10 photos for a place location.
+Each elements of photo[] contains the following fields:
+
+name — A string containing the resource name of the photo when you perform a Photo request. This string is in the form:
+
+
+places/PLACE_ID/photos/PHOTO_RESOURCE
+heightPx — The maximum height of the image, in pixels.
+widthPx — The maximum width of the image, in pixels.
+authorAttributions[] — Any required attributions. This field is always present, but might be empty.
+Photos returned by the Photo service are sourced from a variety of locations, including business owners and user contributed photos. In most cases, these photos can be used without attribution, or will have the required attribution included as a part of the image. However, if the returned photo element includes a value in the authorAttributions field, you must include the additional attribution in your application wherever you display the image.
+
+Caution: You cannot cache a photo name. Also, the name can expire. Ensure that you always get the name from the response to a request to Place Details (New), Nearby Search (New), or Text Search (New). For more information, see the caching restrictions stated in Section 3.2.3(b)(No Caching) of the Google Maps Platform Terms of Service.
+The following example shows a Place Details request that includes photos in the field mask so that the response includes the photos[] array in the response:
+
+
+curl -X GET \
+-H 'Content-Type: application/json' -H "X-Goog-Api-Key: API_KEY" \
+-H "X-Goog-FieldMask: id,displayName,photos" \
+https://places.googleapis.com/v1/places/ChIJ2fzCmcW7j4AR2JzfXBBoh6E
+An example of a photos[] array in the response is shown below.
+
+    ...
+    "photos" : [
+      {
+        "name": "places/ChIJ2fzCmcW7j4AR2JzfXBBoh6E/photos/AUacShh3_Dd8yvV2JZMtNjjbbSbFhSv-0VmUN-uasQ2Oj00XB63irPTks0-A_1rMNfdTunoOVZfVOExRRBNrupUf8TY4Kw5iQNQgf2rwcaM8hXNQg7KDyvMR5B-HzoCE1mwy2ba9yxvmtiJrdV-xBgO8c5iJL65BCd0slyI1",
+        "widthPx": 6000,
+        "heightPx": 4000,
+        "authorAttributions": [
+          {
+            "displayName": "John Smith",
+            "uri": "//maps.google.com/maps/contrib/101563",
+            "photoUri": "//lh3.googleusercontent.com/a-/AD_cFT-b=s100-p-k-no-mo"
+          }
+        ]
+      },    ...
+Request a place photo
+The example request below returns an image using its resource name, resizing it so that it is at most 400 pixels tall and wide:
+
+
+https://places.googleapis.com/v1/places/ChIJ2fzCmcW7j4AR2JzfXBBoh6E/photos/AUacShh3_Dd8yvV2JZMtNjjbbSbFhSv-0VmUN-uasQ2Oj00XB63irPTks0-A_1rMNfdTunoOVZfVOExRRBNrupUf8TY4Kw5iQNQgf2rwcaM8hXNQg7KDyvMR5B-HzoCE1mwy2ba9yxvmtiJrdV-xBgO8c5iJL65BCd0slyI1/media?maxHeightPx=400&maxWidthPx=400&key=API_KEY
+The response of a successful Place Photo request is an image. The type of the image depends on the type of the originally submitted photo.
+
+If your request exceeds your available quota, the server returns an HTTP 403 status and display the below image to indicate that the quota has been exceeded:
+
+Over Quota image
+If the server is unable to understand your request, then it returns HTTP 400 status, which indicates an invalid request. The most common reasons for an invalid request include:
+
+The submitted photo name was not correctly specified.
+The request did not include the maxHeightPx or the maxWidthPx parameter.
+The value of the maxHeightPx or the maxWidthtPx parameter was set to null.
+The name has expired. If name expires, make a request to Place Details (New), Nearby Search (New), or Text Search (New) to obtain a new name.
+
+Autocomplete (New) 
+
+bookmark_border
+ 
+Select platform: Android iOS JavaScript Web Service
+The Autocomplete (New) service is a web service that returns place predictions and query predictions in response to an HTTP request. In the request, specify a text search string and geographic bounds that controls the search area.
+
+The Autocomplete (New) service can match on full words and substrings of the input, resolving place names, addresses, and plus codes. Applications can therefore send queries as the user types, to provide on-the-fly place and query predictions.
+
+The response from the Autocomplete (New) API can contain two types of predictions:
+
+Place predictions: Places, such as businesses, addresses and points of interest, based on the specified input text string and search area. Place predictions are returned by default.
+Query predictions: Query strings matching the input text string and search area. Query predictions are not returned by default. Use the includeQueryPredictions request parameter to add query predictions to the response.
+For example, you call the API using as input a string that contains a partial user input, "Sicilian piz", with the search area limited to San Francisco, CA. The response then contains a list of place predictions that match the search string and search area, such as the restaurant named "Sicilian Pizza Kitchen", along with details about the place.
+
+The returned place predictions are designed to be presented to the user to aid them in selecting the desired place. You can make a Place Details (New) request to get more information about any of the returned place predictions.
+
+The response can also contain a list of query predictions that match the search string and search area, such as "Sicilian Pizza & Pasta". Each query prediction in the response includes the text field containing a recommended text search string. Use that string as an input to Text Search (New) to perform a more detailed search.
+
+Note: You can use Autocomplete (New) even without a map. If you do show a map, it must be a Google map. When you display predictions from the Autocomplete (New) service without a map, you must include the Google logo displayed inline with the search field/results. For more information, see Displaying the Google logo and attributions.
+The APIs Explorer lets you make live requests so that you can get familiar with the API and the API options:
+
+Try it!
+Autocomplete (New) requests
+An Autocomplete (New) request is an HTTP POST request to a URL in the form:
+
+
+https://places.googleapis.com/v1/places:autocomplete
+Pass all parameters in the JSON request body or in headers as part of the POST request. For example:
+
+
+curl -X POST -d '{
+  "input": "pizza",
+  "locationBias": {
+    "circle": {
+      "center": {
+        "latitude": 37.7937,
+        "longitude": -122.3965
+      },
+      "radius": 500.0
+    }
+  }
+}' \
+-H 'Content-Type: application/json' -H "X-Goog-Api-Key: API_KEY" \
+https://places.googleapis.com/v1/places:autocomplete
+About the response
+Autocomplete (New) returns a JSON object as a response. In the response:
+
+The suggestions array contains all of the predicted places and queries in order based on their perceived relevance. Each place is represented by a placePrediction field and each query is represented by a queryPrediction field.
+A placePrediction field contains detailed information about a single place prediction, including the place ID, and text description.
+A queryPrediction field contains detailed information about a single query prediction.
+
+
+Place Types (New) 
+
+bookmark_border
+ 
+Select platform: Android iOS JavaScript Web Service
+Place types are categories that identify the characteristics of a place. A place can have one or more place types assigned to it.
+
+A place's types are included in the response from a Place Details (New), Nearby Search (New), Text Search (New), and Place Autocomplete (New) request:
+
+A place can have a single primary type from type Table A or type Table B associated with it. For example, the primary type might be "mexican_restaurant" or "steak_house".
+A place can have multiple type values from type Table A or type Table B associated with it. For example a restaurant might have the following types: "seafood_restaurant", "restaurant", "food", "point_of_interest", "establishment".
+You can also specify place types as part of a request. When specified in the request, the type acts as a filter to restrict the response to only include places that match the specified types.
+
+About the type tables
+Table A lists the types that are used in the following ways:
+
+As part of a response from Place Details (New), Nearby Search (New), and Text Search (New). The request must specify at least one of the places.types or places.primaryType fields in the field mask. The values in Table A are then used to populate those fields.
+As part of a Nearby Search (New) request, used as the value of the includedTypes, excludedTypes, includedPrimaryTypes, and excludedPrimaryTypes parameter. The values in Table B are then used to populate those fields.
+As part of a Text Search (New) request, used as the value of the includedType parameter.
+As part of a Place Autocomplete (New) request, use as the values to the includedPrimaryTypes parameter.
+As part of a Place Autocomplete (New) response.
+Table B lists additional place type values which may also be returned as part of a Place Details (New), Nearby Search (New), Text Search (New), and Place Autocomplete (New) response. The request must specify at least one of the places.types or places.primaryType fields in the field mask. Values from Table B may NOT be used as part of a request, except as the values to the includedPrimaryTypes parameter for a Place Autocomplete (New) request.
+
+Table A
+Note: Types with an asterisk (*) were added as part of the November 7, 2024 release.
+Automotive
+Business
+Culture
+Education
+Entertainment and Recreation
+Facilities *
+Finance
+Food and Drink
+Geographical Areas
+Government
+Health and Wellness
+Housing *
+Lodging
+Natural Features *
+Places of Worship
+Services
+Shopping
+Sports
+Transportation
+Automotive
+car_dealer
+car_rental
+car_repair
+car_wash
+electric_vehicle_charging_station
+gas_station
+parking
+rest_stop
+Business
+corporate_office *
+farm
+ranch *
+Culture
+art_gallery
+art_studio *
+auditorium *
+cultural_landmark *
+historical_place *
+monument *
+museum
+performing_arts_theater
+sculpture *
+Education
+library
+preschool
+primary_school	school
+secondary_school
+university
+Entertainment and Recreation
+adventure_sports_center *
+amphitheatre *
+amusement_center
+amusement_park
+aquarium
+banquet_hall
+barbecue_area *
+botanical_garden *
+bowling_alley
+casino
+childrens_camp *
+comedy_club *
+community_center
+concert_hall *
+convention_center
+cultural_center
+cycling_park *
+dance_hall *
+dog_park
+event_venue
+ferris_wheel *
+garden *
+hiking_area *
+historical_landmark
+internet_cafe *
+karaoke *
+marina
+movie_rental
+movie_theater
+national_park
+night_club
+observation_deck *
+off_roading_area *
+opera_house *
+park
+philharmonic_hall *
+picnic_ground *
+planetarium *
+plaza *
+roller_coaster *
+skateboard_park *
+state_park *
+tourist_attraction
+video_arcade *
+visitor_center
+water_park *
+wedding_venue
+wildlife_park *
+wildlife_refuge *
+zoo
+Facilities
+public_bath *
+public_bathroom *
+stable *
+Finance
+accounting
+atm
+bank
+Food and Drink
+acai_shop *
+afghani_restaurant *
+african_restaurant *
+american_restaurant
+asian_restaurant *
+bagel_shop *
+bakery
+bar
+bar_and_grill *
+barbecue_restaurant
+brazilian_restaurant
+breakfast_restaurant
+brunch_restaurant
+buffet_restaurant *
+cafe
+cafeteria *
+candy_store *
+cat_cafe *
+chinese_restaurant
+chocolate_factory *
+chocolate_shop *
+coffee_shop
+confectionery *
+deli *
+dessert_restaurant *
+dessert_shop *
+diner *
+dog_cafe *
+donut_shop *
+fast_food_restaurant
+fine_dining_restaurant *
+food_court *
+french_restaurant
+greek_restaurant
+hamburger_restaurant
+ice_cream_shop
+indian_restaurant
+indonesian_restaurant
+italian_restaurant
+japanese_restaurant
+juice_shop *
+korean_restaurant *
+lebanese_restaurant
+meal_delivery
+meal_takeaway
+mediterranean_restaurant
+mexican_restaurant
+middle_eastern_restaurant
+pizza_restaurant
+pub *
+ramen_restaurant
+restaurant
+sandwich_shop
+seafood_restaurant
+spanish_restaurant
+steak_house
+sushi_restaurant
+tea_house *
+thai_restaurant
+turkish_restaurant
+vegan_restaurant
+vegetarian_restaurant
+vietnamese_restaurant
+wine_bar *
+Geographical Areas
+administrative_area_level_1
+administrative_area_level_2
+country	locality
+postal_code
+school_district
+Government
+city_hall
+courthouse
+embassy
+fire_station
+government_office *	local_government_office
+neighborhood_police_station (Japan only)
+police
+post_office
+Health and Wellness
+chiropractor *
+dental_clinic
+dentist
+doctor
+drugstore
+hospital
+massage *
+medical_lab *	pharmacy
+physiotherapist
+sauna *
+skin_care_clinic *
+spa
+tanning_studio *
+wellness_center *
+yoga_studio *
+Housing
+apartment_building *
+apartment_complex *
+condominium_complex *
+housing_complex *
+Lodging
+bed_and_breakfast
+budget_japanese_inn *
+campground
+camping_cabin
+cottage
+extended_stay_hotel
+farmstay
+guest_house hostel *
+hotel *
+inn *
+japanese_inn *
+lodging
+mobile_home_park *
+motel
+private_guest_room
+resort_hotel
+rv_park
+Natural Features
+beach *
+Places of Worship
+church
+hindu_temple
+mosque
+synagogue
+Services
+astrologer *
+barber_shop
+beautician *
+beauty_salon
+body_art_service *
+catering_service *
+cemetery
+child_care_agency
+consultant
+courier_service
+electrician
+florist
+food_delivery *
+foot_care *
+funeral_home
+hair_care
+hair_salon
+insurance_agency laundry *
+lawyer
+locksmith
+makeup_artist *
+moving_company
+nail_salon *
+painter
+plumber
+psychic *
+real_estate_agency
+roofing_contractor
+storage
+summer_camp_organizer *
+tailor
+telecommunications_service_provider
+tour_agency *
+tourist_information_center *
+travel_agency
+veterinary_care
+Shopping
+asian_grocery_store *
+auto_parts_store
+bicycle_store
+book_store
+butcher_shop *
+cell_phone_store
+clothing_store
+convenience_store
+department_store
+discount_store
+electronics_store
+food_store *
+furniture_store
+gift_shop
+grocery_store
+hardware_store
+home_goods_store	home_improvement_store
+jewelry_store
+liquor_store
+market
+pet_store
+shoe_store
+shopping_mall
+sporting_goods_store
+store
+supermarket
+warehouse_store *
+wholesaler
+Sports
+arena *
+athletic_field
+fishing_charter *
+fishing_pond *
+fitness_center
+golf_course
+gym
+ice_skating_rink *
+playground *
+ski_resort
+sports_activity_location *
+sports_club
+sports_coaching *
+sports_complex
+stadium
+swimming_pool
+Transportation
+airport
+airstrip *
+bus_station
+bus_stop
+ferry_terminal
+heliport
+international_airport *
+light_rail_station
+park_and_ride *
+subway_station
+taxi_stand
+train_station
+transit_depot
+transit_station
+truck_stop
+Table B
+The Place type values in Table B may be returned as part of a Place Autocomplete (New) response. These types are also supported by includedPrimaryTypes for Place Autocomplete (New) requests.
+
+Additional Place type values
+administrative_area_level_3
+administrative_area_level_4
+administrative_area_level_5
+administrative_area_level_6
+administrative_area_level_7
+archipelago
+colloquial_area
+continent
+establishment
+finance
+floor
+food
+general_contractor
+geocode
+health
+intersection
+landmark
+natural_feature
+neighborhood
+place_of_worship
+plus_code	point_of_interest
+political
+post_box
+postal_code_prefix
+postal_code_suffix
+postal_town
+premise
+room
+route
+street_address
+street_number
+sublocality
+sublocality_level_1
+sublocality_level_2
+sublocality_level_3
+sublocality_level_4
+sublocality_level_5
+subpremise
+town_square
+
+
+Place Data Fields (New) 
+
+bookmark_border
+ 
+Select platform: Android iOS JavaScript Web Service
+Place data fields define the place data to return in the response for Place Details (New), Text Search (New), and Nearby Search (New). In the request, you specify the list of fields to return, called the field mask or field list, from the Property field column. If you don't specify at least one field in the field mask, or if you omit the field mask, then the call returns an error.
+
+This page lists all the place data fields by pricing tier (SKU). For more information about how requests are billed, see Usage and Billing.
+
+Search for fields
+Field description	Property field	Place Details SKU	Text Search SKU	Nearby Search SKU
+Accessibility options	accessibilityOptions	Place Details Pro	Text Search Pro	Nearby Search Pro
+Address components	addressComponents	Place Details Essentials	Text Search Pro	Nearby Search Pro
+Address (ADR microformat)	adrFormatAddress	Place Details Essentials	Text Search Pro	Nearby Search Pro
+Allows dogs	allowsDogs	Place Details Enterprise + Atmosphere	Text Search Enterprise +	Nearby Search Enterprise +
+Business status	businessStatus	Place Details Pro	Text Search Pro	Nearby Search Pro
+Containing places	containingPlaces	Place Details Pro	Text Search Pro	Nearby Search Pro
+Curbside pickup	curbsidePickup	Place Details Enterprise + Atmosphere	Text Search Enterprise +	Nearby Search Enterprise +
+Current opening hours	currentOpeningHours	Place Details Enterprise	Text Search Pro	Nearby Search Enterprise
+Current secondary opening hours	currentSecondaryOpeningHours	Place Details Enterprise	Text Search Pro	Nearby Search Enterprise
+Delivery	delivery	Place Details Enterprise + Atmosphere	Text Search Enterprise +	Nearby Search Enterprise +
+Dine in	dineIn	Place Details Enterprise + Atmosphere	Text Search Enterprise +	Nearby Search Enterprise +
+Display name	displayName	Place Details Pro	Text Search Pro	Nearby Search Pro
+Editorial summary	editorialSummary	Place Details Enterprise + Atmosphere	Text Search Enterprise +	Nearby Search Enterprise +
+EV charging options	evChargeOptions	Place Details Enterprise + Atmosphere	Text Search Enterprise +	Nearby Search Enterprise +
+Formatted address	formattedAddress	Place Details Essentials	Text Search Pro	Nearby Search Pro
+Fuel options	fuelOptions	Place Details Enterprise + Atmosphere	Text Search Enterprise +	Nearby Search Enterprise +
+Good for children	goodForChildren	Place Details Enterprise + Atmosphere	Text Search Enterprise +	Nearby Search Enterprise +
+Good for groups	goodForGroups	Place Details Enterprise + Atmosphere	Text Search Enterprise +	Nearby Search Enterprise +
+Good for watching sports	goodForWatchingSports	Place Details Enterprise + Atmosphere	Text Search Enterprise +	Nearby Search Enterprise +
+Google Maps links	googleMapsLinks	Place Details Pro	Text Search Pro	Nearby Search Pro
+Google Maps URI	googleMapsUri	Place Details Pro	Text Search Pro	Nearby Search Pro
+Icon background color	iconBackgroundColor	Place Details Pro	Text Search Pro	Nearby Search Pro
+Icon mask base URI	iconMaskBaseUri	Place Details Pro	Text Search Pro	Nearby Search Pro
+International phone number	internationalPhoneNumber	Place Details Enterprise	Text Search Pro	Nearby Search Enterprise
+Live music	liveMusic	Place Details Enterprise + Atmosphere	Text Search Enterprise +	Nearby Search Enterprise +
+Location	location	Place Details Essentials	Text Search Pro	Nearby Search Pro
+Menu for children	menuForChildren	Place Details Enterprise + Atmosphere	Text Search Enterprise +	Nearby Search Enterprise +
+Name	name	Place Details Essentials ID Only	Text Search Essentials ID Only	Nearby Search Pro
+National phone number	nationalPhoneNumber	Place Details Enterprise	Text Search Pro	Nearby Search Enterprise
+Outdoor seating	outdoorSeating	Place Details Enterprise + Atmosphere	Text Search Enterprise +	Nearby Search Enterprise +
+Parking options	parkingOptions	Place Details Enterprise + Atmosphere	Text Search Enterprise +	Nearby Search Enterprise +
+Payment options	paymentOptions	Place Details Enterprise + Atmosphere	Text Search Enterprise +	Nearby Search Enterprise +
+Photos	photos	Place Details Essentials ID Only	Text Search Pro	Nearby Search Pro
+Place ID	id	Place Details Essentials ID Only	Text Search Essentials ID Only	Nearby Search Pro
+Plus code	plusCode	Place Details Essentials	Text Search Pro	Nearby Search Pro
+Price level	priceLevel	Place Details Enterprise	Text Search Pro	Nearby Search Enterprise
+Price range	priceRange	Place Details Enterprise	Text Search Pro	Nearby Search Enterprise
+Primary type	primaryType	Place Details Pro	Text Search Pro	Nearby Search Pro
+Primary type display name	primaryTypeDisplayName	Place Details Pro	Text Search Pro	Nearby Search Pro
+Pure service area business	pureServiceAreaBusiness	Place Details Pro	Text Search Pro	Nearby Search Pro
+Rating	rating	Place Details Enterprise	Text Search Pro	Nearby Search Enterprise
+Regular opening hours	regularOpeningHours	Place Details Enterprise	Text Search Pro	Nearby Search Enterprise
+Regular secondary opening hours	regularSecondaryOpeningHours	Place Details Enterprise	Text Search Pro	Nearby Search Enterprise
+Reservable	reservable	Place Details Enterprise + Atmosphere	Text Search Enterprise +	Nearby Search Enterprise +
+Restroom	restroom	Place Details Enterprise + Atmosphere	Text Search Enterprise +	Nearby Search Enterprise +
+Reviews	reviews	Place Details Enterprise + Atmosphere	Text Search Enterprise +	Nearby Search Enterprise +
+Serves beer	servesBeer	Place Details Enterprise + Atmosphere	Text Search Enterprise +	Nearby Search Enterprise +
+Serves breakfast	servesBreakfast	Place Details Enterprise + Atmosphere	Text Search Enterprise +	Nearby Search Enterprise +
+Serves brunch	servesBrunch	Place Details Enterprise + Atmosphere	Text Search Enterprise +	Nearby Search Enterprise +
+Serves cocktails	servesCocktails	Place Details Enterprise + Atmosphere	Text Search Enterprise +	Nearby Search Enterprise +
+Serves coffee	servesCoffee	Place Details Enterprise + Atmosphere	Text Search Enterprise +	Nearby Search Enterprise +
+Serves dessert	servesDessert	Place Details Enterprise + Atmosphere	Text Search Enterprise +	Nearby Search Enterprise +
+Serves dinner	servesDinner	Place Details Enterprise + Atmosphere	Text Search Enterprise +	Nearby Search Enterprise +
+Serves lunch	servesLunch	Place Details Enterprise + Atmosphere	Text Search Enterprise +	Nearby Search Enterprise +
+Serves vegetarian food	servesVegetarianFood	Place Details Enterprise + Atmosphere	Text Search Enterprise +	Nearby Search Enterprise +
+Serves wine	servesWine	Place Details Enterprise + Atmosphere	Text Search Enterprise +	Nearby Search Enterprise +
+Short formatted address	shortFormattedAddress	Place Details Essentials	Text Search Pro	Nearby Search Pro
+Sub-destinations	subDestinations	Place Details Pro	Text Search Pro	Nearby Search Pro
+Types	types	Place Details Essentials	Text Search Pro	Nearby Search Pro
+Takeout	takeout	Place Details Enterprise + Atmosphere	Text Search Enterprise +	Nearby Search Enterprise +
+User rating count	userRatingCount	Place Details Enterprise	Text Search Pro	Nearby Search Enterprise
+UTC offset (minutes)	utcOffsetMinutes	Place Details Pro	Text Search Pro	Nearby Search Pro
+Viewport	viewport	Place Details Essentials	Text Search Pro	Nearby Search Pro
+Website URI	websiteUri	Place Details Enterprise	Text Search Pro	Nearby Search Enterprise
+
+
+Choose fields to return 
+
+bookmark_border
+ 
+When you call the Place Details (New), Nearby Search (New), or Text Search (New) methods, you must specify which fields you want returned in the response. There is no default list of returned fields. If you omit this list, the methods return an error.
+
+A full list of supported data fields and their corresponding SKUs can be found in Place Data Fields (New). For information on fields specific to each API, see the following:
+
+Place Details (New) FieldMask parameters
+Nearby Search (New) FieldMask parameters
+Text Search (New) FieldMask parameters
+You specify the field list by creating a response field mask. You then pass the response field mask to either method by using the parameter $fields or fields, or by using the HTTP or gRPC header X-Goog-FieldMask.
+
+Field masking is a good design practice to ensure that you don't request unnecessary data, which helps to avoid unnecessary processing time and billing charges.
+
+Define a response field mask
+The response field mask is a comma-separated list of paths, where each path specifies a unique field in the response body. The path starts from the top-level response message and uses a dot-separated path to the specified field.
+
+Construct a field path as follows:
+
+
+topLevelField[.secondLevelField][.thirdLevelField][...]
+Note: Don't use spaces anywhere in the list of field paths.
+You can request all fields by using a field mask of *.
+
+Caution: While this wildcard field mask is okay to use in development, don't use the wildcard (*) response field mask in production. The cost may be higher than expected as more advanced features are requested through this field mask, and it increases response latency. Make sure you are requesting only the fields you need to minimize your costs and request response time.
+For more information about how to construct field masks, see the field_mask.proto.
+
+Determine what field masks to use
+Here's how you can determine which field masks you want to use:
+
+Request all fields using a field mask of *.
+Look at the hierarchy of the fields in the response, and determine what fields you want.
+Build your field mask using the field hierarchy.
+Define a response field mask for Nearby Search (New) and Text Search (New)
+Nearby Search (New) and Text Search (New) return an array of Place objects in the places field of the response. For these APIs, places is the top-level field of the response.
+
+For example, to see the complete response object from a Text Search (New):
+
+
+curl -X POST -d '{
+  "textQuery" : "Spicy Vegetarian Food in Sydney, Australia"
+}' \
+-H 'Content-Type: application/json' -H 'X-Goog-Api-Key: API_KEY' \
+-H 'X-Goog-FieldMask: *' \
+'https://places.googleapis.com/v1/places:searchText'
+The complete response object from a Text Search (New) call is in the form:
+
+
+{
+  "places": [
+    {
+      "name": "places/ChIJs5ydyTiuEmsR0fRSlU0C7k0",
+      "id": "ChIJs5ydyTiuEmsR0fRSlU0C7k0",
+      "types": [
+        "vegetarian_restaurant",
+        "vegan_restaurant",
+        "meal_takeaway",
+        "restaurant",
+        "food",
+        "point_of_interest",
+        "establishment"
+      ],
+      "nationalPhoneNumber": "0433 479 794",
+      "internationalPhoneNumber": "+61 433 479 794",
+      "formattedAddress": "29 King St, Sydney NSW 2000, Australia",
+      "displayName": {
+        "text": "Spiced @ Barangaroo",
+        "languageCode": "en"
+      },      ...
+    },
+  ...
+  ]
+}
+Therefore, you specify a field mask for these APIs in the form:
+
+
+places[.secondLevelField][.thirdLevelField][...]
+If you want to return only the formattedAddress and displayName fields, set your field mask to:
+
+
+places.formattedAddress,places.displayName
+Specifying displayName includes both the text and language fields of displayName. If you only want the text field, set the field mask as:
+
+
+places.formattedAddress,places.displayName.text
+Define a response field mask for Place Details (New)
+Place Details returns a single Place object in the form:
+
+
+{
+  "name": "places/ChIJkR8FdQNB0VQRm64T_lv1g1g",
+  "id": "ChIJkR8FdQNB0VQRm64T_lv1g1g",
+  "types": [
+    "locality",
+    "political"
+  ],
+  "formattedAddress": "Trinidad, CA 95570, USA",
+  "displayName": {
+    "text": "Trinidad",
+    "languageCode": "en"
+  }
+  ...
+}
+Therefore, you specify a field mask for this API by specifying the fields of the Place object that you want to return:
+
+
+curl -X GET -H 'Content-Type: application/json' \
+-H "X-Goog-Api-Key: API_KEY" \
+-H "X-Goog-FieldMask: formattedAddress,displayName" \
+https://places.googleapis.com/v1/places/ChIJj61dQgK6j4AR4GeTYWZsKWw
+gRPC call
+For gRPC, set a variable containing the response field mask. You can then pass that variable to the request.
+
+
+const (
+  fieldMask = "places.formattedAddress,places.displayName"
+)
+Field path considerations
+Include only the fields that you require in the response. Returning just the fields that you need:
+
+Decreases processing times, so your results are returned with a lower latency.
+Ensures stable latency performance if the API adds more response fields in the future, and those new fields require extra computation time. If you select all fields, or if you select all fields at the top level, you might experience performance degradation when all new fields are automatically included in your response.
+Results in a smaller response size, which translates into higher network throughput.
+Ensures that you don't request unnecessary data, which helps to avoid unnecessary processing time and billed charges.
+Note: When a response message is parsed, and a field in the response message contains its default value, the field may be omitted from the response even if you specified it in the response field mask. For more information, see the Language Guide (proto3).

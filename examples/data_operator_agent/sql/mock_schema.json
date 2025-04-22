@@ -1,0 +1,146 @@
+{
+    "database": {
+        "name": "mock_database.db",
+        "human_context": {
+            "description": "A simple database for tracking sales transactions."
+        }
+    },
+    "tables": {
+        "sales_data": {
+            "human_context": {
+                "description": "Stores sales transactions including product details, payment methods, and customer regions."
+            },
+            "columns": {
+                "id": {
+                    "data_type": "INTEGER",
+                    "is_primary_key": true
+                },
+                "customer_name": {
+                    "data_type": "TEXT"
+                },
+                "product": {
+                    "data_type": "TEXT"
+                },
+                "quantity": {
+                    "data_type": "INTEGER"
+                },
+                "price": {
+                    "data_type": "FLOAT"
+                },
+                "total_cost": {
+                    "data_type": "FLOAT"
+                },
+                "purchase_date": {
+                    "data_type": "TEXT"
+                },
+                "payment_method": {
+                    "data_type": "TEXT"
+                },
+                "region": {
+                    "data_type": "TEXT"
+                },
+                "discount_applied": {
+                    "data_type": "FLOAT"
+                },
+                "feedback_score": {
+                    "data_type": "INTEGER"
+                }
+            },
+            "aggregations": {
+                "allowed_functions": [
+                    "SUM",
+                    "AVG",
+                    "COUNT",
+                    "MIN",
+                    "MAX"
+                ],
+                "applicable_data_types": {
+                    "SUM": [
+                        "FLOAT",
+                        "INTEGER"
+                    ],
+                    "AVG": [
+                        "FLOAT",
+                        "INTEGER"
+                    ],
+                    "COUNT": [
+                        "ANY"
+                    ],
+                    "MIN": [
+                        "FLOAT",
+                        "INTEGER"
+                    ],
+                    "MAX": [
+                        "FLOAT",
+                        "INTEGER"
+                    ]
+                }
+            },
+            "filters": {
+                "allowed_filter_types": [
+                    "exact",
+                    "range"
+                ],
+                "applicable_data_types": {
+                    "exact": [
+                        "TEXT",
+                        "INTEGER",
+                        "FLOAT"
+                    ],
+                    "range": [
+                        "INTEGER",
+                        "FLOAT",
+                        "TEXT"
+                    ]
+                }
+            },
+            "group_by_options": {
+                "human_context": {
+                    "description": "AI Agent Guidance: Defines which columns should be grouped.",
+                    "qa_section": {
+                        "Which columns make the most sense to group by in typical reports?": "Grouping by `product`, `payment_method`, and `region` provides valuable insights.",
+                        "Are there key categorical fields that drive analytical insights?": "Yes, `product` and `region` often segment sales effectively.",
+                        "Should grouping be avoided for any specific columns?": "Yes, unique identifiers like `id` should not be grouped."
+                    }
+                },
+                "programmatically_obtained": {
+                    "allowed": true,
+                    "recommended_columns": []
+                }
+            },
+            "order_by_options": {
+                "human_context": {
+                    "description": "AI Agent Guidance: Defines which columns can be sorted.",
+                    "qa_section": {
+                        "Which fields do users typically sort by in reports?": "Users often sort by `total_cost`, `quantity`, and `purchase_date`.",
+                        "Are there specific sorting orders that provide better insights?": "Sorting `total_cost` DESC highlights the highest revenue sales.",
+                        "Should sorting be avoided on any fields?": "Yes, `description` and `customer_name` are not useful for sorting."
+                    }
+                },
+                "programmatically_obtained": {
+                    "allowed": true,
+                    "applicable_data_types": [
+                        "INTEGER",
+                        "FLOAT",
+                        "TEXT"
+                    ]
+                }
+            },
+            "pagination": {
+                "human_context": {
+                    "description": "AI Agent Guidance: Defines pagination behavior.",
+                    "qa_section": {
+                        "What is a reasonable default result limit for performance?": "A default limit of 10 ensures fast query performance.",
+                        "Is deep pagination (high offset values) required?": "Deep pagination is rarely needed beyond the top 100 results.",
+                        "Should limits be different for different types of queries?": "Yes, large summary reports may need higher limits."
+                    }
+                },
+                "programmatically_obtained": {
+                    "default_limit": 10,
+                    "max_limit": 1000,
+                    "supports_offset": true
+                }
+            }
+        }
+    }
+}

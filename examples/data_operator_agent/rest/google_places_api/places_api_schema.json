@@ -1,0 +1,614 @@
+{
+    "base_url": "https://places.googleapis.com/v1",
+    "endpoints": {
+        "/places/photos/{photo_id}": {
+            "body_params": [],
+            "human_context": {
+                "description": "Retrieves high-quality images associated with a specific place using a photo resource name. This endpoint is useful for applications that want to enhance user experience by displaying relevant images of places, such as restaurants or attractions.",
+                "qa_section": {
+                    "Are there specific filters required?": "The photo resource name must be provided to retrieve the image. Additionally, dimensions for the image can be specified.",
+                    "How does image resizing work?": "You can specify maximum height and width for the image. If the original image exceeds these dimensions, it will be scaled down while maintaining its aspect ratio.",
+                    "What information can be retrieved?": "Returns the image associated with the specified photo ID, including the image URL and any required attributions."
+                }
+            },
+            "method": {
+                "type": "GET"
+            },
+            "response_format": {
+                "authorAttributions": [
+                    {
+                        "displayName": "STRING",
+                        "photoUri": "STRING",
+                        "uri": "STRING"
+                    }
+                ],
+                "photoUri": "STRING"
+            },
+            "url_params": [
+                {
+                    "default_value": null,
+                    "dependencies": null,
+                    "description": "Unique identifier for the photo resource.",
+                    "example_values": [
+                        "places/ChIJ2fzCmcW7j4AR2JzfXBBoh6E/photos/AUacShh3_Dd8yvV2JZMtNjjbbSbFhSv-0VmUN-uasQ2Oj00XB63irPTks0-A_1rMNfdTunoOVZfVOExRRBNrupUf8TY4Kw5iQNQgf2rwcaM8hXNQg7KDyvMR5B-HzoCE1mwy2ba9yxvmtiJrdV-xBgO8c5iJL65BCd0slyI1"
+                    ],
+                    "format_rules": {
+                        "format": "KEY=VALUE",
+                        "separator": "&"
+                    },
+                    "param_name": "photo_id",
+                    "param_type": "STRING",
+                    "required": true,
+                    "validation_rules": null
+                },
+                {
+                    "default_value": null,
+                    "dependencies": null,
+                    "description": "Maximum height of the image in pixels.",
+                    "example_values": [
+                        "400",
+                        "800"
+                    ],
+                    "format_rules": {
+                        "format": "KEY=VALUE",
+                        "separator": "&"
+                    },
+                    "param_name": "maxHeightPx",
+                    "param_type": "INTEGER",
+                    "required": false,
+                    "validation_rules": {
+                        "max_value": 4800,
+                        "min_value": 1
+                    }
+                },
+                {
+                    "default_value": null,
+                    "dependencies": null,
+                    "description": "Maximum width of the image in pixels.",
+                    "example_values": [
+                        "400",
+                        "800"
+                    ],
+                    "format_rules": {
+                        "format": "KEY=VALUE",
+                        "separator": "&"
+                    },
+                    "param_name": "maxWidthPx",
+                    "param_type": "INTEGER",
+                    "required": false,
+                    "validation_rules": {
+                        "max_value": 4800,
+                        "min_value": 1
+                    }
+                }
+            ],
+            "validation_endpoint": {
+                "endpoint": "/places/{place_id}"
+            }
+        },
+        "/places/{place_id}": {
+            "body_params": [],
+            "headers": [
+            ],
+            "human_context": {
+                "description": "Retrieves comprehensive information about a specific place identified by its place ID. This endpoint is essential for applications that need in-depth details about a location, including its address, phone number, user ratings, reviews, and more.",
+                "qa_section": {
+                    "Are there specific filters required?": "No specific filters are required, but users must specify the desired fields using the 'X-Goog-FieldMask' header to customize the response.",
+                    "How does the field mask affect the response?": "The field mask allows users to specify which details they want to receive, optimizing data retrieval and minimizing response size. Using '*' will return all fields but may lead to higher costs and increased response latency.",
+                    "What happens if the field mask is invalid?": "An INVALID_ARGUMENT error will be returned if an invalid field name is specified."
+                }
+            },
+            "method": {
+                "type": "GET"
+            },
+            "response_format": {
+                "displayName": {
+                    "languageCode": "STRING",
+                    "text": "STRING"
+                },
+                "formattedAddress": "STRING",
+                "id": "STRING",
+                "internationalPhoneNumber": "STRING",
+                "rating": "FLOAT",
+                "reviews": [
+                    {
+                        "author": "STRING",
+                        "rating": "FLOAT",
+                        "text": "STRING",
+                        "time": "STRING"
+                    }
+                ],
+                "primaryType": "STRING",
+                "priceLevel": "INTEGER",
+                "currentOpeningHours": {
+                    "open_now": "BOOLEAN",
+                    "weekday_text": ["STRING"]
+                },
+                "websiteUri": "STRING",
+                "photos": [
+                    {
+                        "name": "STRING",
+                        "widthPx": "INTEGER",
+                        "heightPx": "INTEGER",
+                        "authorAttributions": [
+                            {
+                                "displayName": "STRING",
+                                "uri": "STRING",
+                                "photoUri": "STRING"
+                            }
+                        ]
+                    }
+                ]
+            },
+            "url_params": [
+                {
+                    "default_value": null,
+                    "dependencies": null,
+                    "description": "Unique identifier of the place. should be used in endpoint.",
+                    "example_values": [
+                        "places/ChIJj61dQgK6j4AR4GeTYWZsKWw"
+                    ],
+                    "format_rules": {
+                        "format": "KEY=VALUE",
+                        "separator": "&"
+                    },
+                    "param_name": "place_id",
+                    "param_type": "STRING",
+                    "required": true,
+                    "validation_rules": {
+                        "regex_pattern": "^places/[^/]+$"
+                    }
+                },
+                {
+                    "default_value": "displayName,id,formattedAddress,rating,reviews,currentOpeningHours",
+                    "dependencies": null,
+                    "description": "Comma-separated list of fields to return in the response. Use '*' to retrieve all fields (not recommended for production).",
+                    "example_values": [
+                        "displayName,formattedAddress,rating",
+                        "id,websiteUri,reviews",
+                        "primaryType,photos,priceLevel",
+                        "*"
+                    ],
+                    "format_rules": {
+                        "format": "KEY=VALUE",
+                        "separator": "&"
+                    },
+                    "param_name": "X-Goog-FieldMask",
+                    "param_type": "STRING",
+                    "required": true,
+                    "validation_rules": {
+                        "allowed_values": [
+                            "displayName", "id", "formattedAddress", "rating", "reviews",
+                            "currentOpeningHours", "primaryType", "priceLevel",
+                            "websiteUri", "photos", "*"
+                        ]
+                    }
+                }
+            ],
+            "validation_endpoint": {
+                "endpoint": "/places:searchNearby",
+                "description": "Use this endpoint to search for places and retrieve their place IDs before making a Place Details request."
+            }
+        },
+        "/places:autocomplete": {
+            "body_params": [
+                {
+                    "default_value": null,
+                    "dependencies": null,
+                    "description": "The text input for which predictions are requested.",
+                    "example_values": [
+                        "pizza",
+                        "coffee near me"
+                    ],
+                    "format_rules": {
+                        "format": "KEY=VALUE",
+                        "separator": "&"
+                    },
+                    "param_name": "input",
+                    "param_type": "STRING",
+                    "required": true,
+                    "validation_rules": null
+                },
+                {
+                    "default_value": null,
+                    "dependencies": null,
+                    "description": "Defines the geographic bounds for the predictions.",
+                    "example_values": [
+                        {
+                            "circle": {
+                                "center": {
+                                    "latitude": 37.7937,
+                                    "longitude": -122.3965
+                                },
+                                "radius": 500.0
+                            }
+                        }
+                    ],
+                    "format_rules": {
+                        "data_structure": "NESTED",
+                        "nested_keys": [
+                            "circle",
+                            "rectangle"
+                        ]
+                    },
+                    "param_name": "locationBias",
+                    "param_type": "OBJECT",
+                    "required": false,
+                    "validation_rules": null
+                },
+                {
+                    "default_value": "false",
+                    "dependencies": null,
+                    "description": "Specifies whether to include query predictions in the response.",
+                    "example_values": [
+                        "true",
+                        "false"
+                    ],
+                    "format_rules": {
+                        "data_structure": "FLAT"
+                    },
+                    "param_name": "includeQueryPredictions",
+                    "param_type": "BOOLEAN",
+                    "required": false,
+                    "validation_rules": null
+                }
+            ],
+            "headers": [
+                {
+                    "allowed_values": null,
+                    "default_value": "suggestions.placePrediction",
+                    "dependencies": [],
+                    "description": "Specifies which fields should be included in the API response to optimize data retrieval and minimize payload size.",
+                    "example_values": [
+                        "suggestions.placePrediction,suggestions.queryPrediction"
+                    ],
+                    "header_name": "X-Goog-FieldMask",
+                    "required": true
+                }
+            ],
+            "human_context": {
+                "description": "The Autocomplete (New) API offers place and query predictions based on user input. It returns suggestions for places, addresses, and queries as the user types, enhancing the search experience. This endpoint is particularly beneficial for applications that require real-time suggestions to assist users in finding locations quickly.",
+                "qa_section": {
+                    "Are there specific filters required?": "Geographic bounds can be specified to refine predictions, but are not mandatory.",
+                    "How does the prediction process work?": "As the user types, the API provides real-time suggestions that match the input, improving user experience.",
+                    "What information can be retrieved?": "Returns a list of place predictions and query predictions based on the input text and geographic bounds."
+                }
+            },
+            "method": {
+                "type": "POST"
+            },
+            "response_format": {
+                "suggestions": [
+                    {
+                        "placePrediction": {
+                            "description": "TEXT",
+                            "matchedSubstrings": [
+                                {
+                                    "length": "INTEGER",
+                                    "offset": "INTEGER"
+                                }
+                            ],
+                            "placeId": "STRING"
+                        },
+                        "queryPrediction": {
+                            "text": "TEXT"
+                        }
+                    }
+                ]
+            },
+            "url_params": [],
+            "validation_endpoint": {
+                "endpoint": null
+            }
+        },
+        "/places:searchNearby": {
+            "body_params": [
+                {
+                    "default_value": null,
+                    "dependencies": null,
+                    "description": "A list of place types to include in the search results.",
+                    "example_values": [
+                        [
+                            "restaurant",
+                            "park"
+                        ]
+                    ],
+                    "format_rules": {
+                        "data_structure": "ARRAY"
+                    },
+                    "param_name": "includedTypes",
+                    "param_type": "ARRAY",
+                    "required": false,
+                    "validation_rules": {
+                        "max_items": 50
+                    }
+                },
+                {
+                    "default_value": 3,
+                    "dependencies": null,
+                    "description": "Specifies the maximum number of place results to return.",
+                    "example_values": [
+                        "10"
+                    ],
+                    "format_rules": {
+                        "data_structure": "FLAT"
+                    },
+                    "param_name": "maxResultCount",
+                    "param_type": "INTEGER",
+                    "required": false,
+                    "validation_rules": {
+                        "max_value": 20,
+                        "min_value": 1
+                    }
+                },
+                {
+                    "default_value": null,
+                    "dependencies": null,
+                    "description": "Defines the search area as a circle with a center point and radius.",
+                    "example_values": [
+                        {
+                            "circle": {
+                                "center": {
+                                    "latitude": 37.7937,
+                                    "longitude": -122.3965
+                                },
+                                "radius": 500.0
+                            }
+                        }
+                    ],
+                    "format_rules": {
+                        "data_structure": "NESTED",
+                        "nested_keys": [
+                            "circle"
+                        ]
+                    },
+                    "param_name": "locationRestriction",
+                    "param_type": "OBJECT",
+                    "required": true,
+                    "validation_rules": null
+                },
+                {
+                    "default_value": "POPULARITY",
+                    "dependencies": null,
+                    "description": "Specifies how the results are ranked.",
+                    "example_values": [
+                        "DISTANCE"
+                    ],
+                    "format_rules": {
+                        "data_structure": "FLAT"
+                    },
+                    "param_name": "rankPreference",
+                    "param_type": "ENUM",
+                    "required": false,
+                    "validation_rules": {
+                        "allowed_values": [
+                            "POPULARITY",
+                            "DISTANCE"
+                        ]
+                    }
+                }
+            ],
+            "headers": [
+                {
+                    "allowed_values": null,
+                    "default_value": "places.id,places.displayName,places.formattedAddress",
+                    "dependencies": null,
+                    "description": "Specifies which fields should be included in the API response to optimize data retrieval and minimize payload size. The field mask ensures only necessary fields are returned, reducing processing time and API costs. Field names must be comma-separated with no spaces. \n\n🚨 **Required Field:** `places.id` must always be included in the field mask to uniquely identify each place in the response. Omitting `places.id` will result in an error.\n\n🌍 **Field Mask Best Practices:** \n- Include only the fields necessary for your application to improve response time and reduce costs. \n- Avoid using `*` in production to prevent unnecessary data retrieval and higher billing. \n- When fetching images, include `places.photos` to obtain photo resource names.\n- For business hours, include `places.currentOpeningHours` or `places.regularOpeningHours`.\n\n🔍 **Example Use Cases:**\n- **Basic Place Details:** `places.id,places.displayName,places.formattedAddress`\n- **With Rating & Reviews:** `places.id,places.displayName,places.formattedAddress,places.rating,places.reviews`\n- **With Business Hours:** `places.id,places.displayName,places.currentOpeningHours,places.formattedAddress`\n- **All Available Details (Use with caution):** `places.id,places.displayName,places.formattedAddress,places.rating,places.reviews,places.types,places.primaryType,places.currentOpeningHours,places.photos,places.priceLevel,places.websiteUri`",
+                    "example_values": [
+                        "places.id,places.displayName,places.formattedAddress",
+                        "places.id,places.displayName,places.formattedAddress,places.rating,places.reviews",
+                        "places.id,places.displayName,places.currentOpeningHours,places.formattedAddress",
+                        "places.id,places.displayName,places.formattedAddress,places.rating,places.reviews,places.types,places.primaryType,places.currentOpeningHours,places.photos,places.priceLevel,places.websiteUri"
+                    ],
+                    "header_name": "X-Goog-FieldMask",
+                    "required": true
+                }
+            ],
+            "human_context": {
+                "description": "The Nearby Search (New) API allows users to search for places within a specified area defined by a circle (latitude, longitude, and radius). It returns a list of matching places based on included types, such as restaurants or parks. The response includes detailed information about each place, such as display name, formatted address, and types, depending on the specified field mask. This API is particularly useful for applications that need to find nearby points of interest based on user location.",
+                "qa_section": {
+                    "Are there specific filters required?": "You can specify included types to filter results, and a location restriction to define the search area.",
+                    "How does pagination affect retrieval?": "The 'maxResultCount' parameter limits the number of results returned. Use pagination to navigate through larger datasets.",
+                    "What information can be retrieved?": "Returns a list of places including their display names, formatted addresses, and types based on the specified search criteria."
+                }
+            },
+            "method": {
+                "type": "POST"
+            },
+            "response_format": {
+                "places": [
+                    {
+                        "displayName": {
+                            "languageCode": "TEXT",
+                            "text": "TEXT"
+                        },
+                        "formattedAddress": "TEXT",
+                        "location": {
+                            "latitude": "FLOAT",
+                            "longitude": "FLOAT"
+                        },
+                        "types": [
+                            "TEXT"
+                        ]
+                    }
+                ]
+            },
+            "url_params": [],
+            "validation_endpoint": {
+                "endpoint": null
+            }
+        },
+        "/places:searchText": {
+            "body_params": [
+                {
+                    "default_value": null,
+                    "dependencies": null,
+                    "description": "The text string on which to search for places.",
+                    "example_values": [
+                        "pizza in New York",
+                        "coffee near me"
+                    ],
+                    "format_rules": {
+                        "format": "KEY=VALUE",
+                        "separator": "&"
+                    },
+                    "param_name": "textQuery",
+                    "param_type": "STRING",
+                    "required": true,
+                    "validation_rules": null
+                },
+                {
+                    "default_value": null,
+                    "dependencies": null,
+                    "description": "Specifies an area to search, which can be a circle or rectangle.",
+                    "example_values": [
+                        {
+                            "circle": {
+                                "center": {
+                                    "latitude": 37.7937,
+                                    "longitude": -122.3965
+                                },
+                                "radius": 500.0
+                            }
+                        }
+                    ],
+                    "format_rules": {
+                        "data_structure": "NESTED",
+                        "nested_keys": [
+                            "circle",
+                            "rectangle"
+                        ]
+                    },
+                    "param_name": "locationBias",
+                    "param_type": "OBJECT",
+                    "required": false,
+                    "validation_rules": null
+                },
+                {
+                    "default_value": null,
+                    "dependencies": null,
+                    "description": "Restricts the search to places that are marked at certain price levels.",
+                    "example_values": [
+                        [
+                            "PRICE_LEVEL_INEXPENSIVE",
+                            "PRICE_LEVEL_MODERATE"
+                        ]
+                    ],
+                    "format_rules": {
+                        "data_structure": "ARRAY"
+                    },
+                    "param_name": "priceLevels",
+                    "param_type": "ARRAY",
+                    "required": false,
+                    "validation_rules": {
+                        "allowed_values": [
+                            "PRICE_LEVEL_INEXPENSIVE",
+                            "PRICE_LEVEL_MODERATE",
+                            "PRICE_LEVEL_EXPENSIVE"
+                        ]
+                    }
+                },
+                {
+                    "default_value": false,
+                    "dependencies": null,
+                    "description": "If true, return only those places that are open for business at the time the query is sent.",
+                    "example_values": [
+                        true
+                    ],
+                    "format_rules": {
+                        "data_structure": "FLAT"
+                    },
+                    "param_name": "openNow",
+                    "param_type": "BOOLEAN",
+                    "required": false,
+                    "validation_rules": null
+                },
+                {
+                    "default_value": 3,
+                    "dependencies": null,
+                    "description": "Specifies the maximum number of place results to return.",
+                    "example_values": [
+                        10
+                    ],
+                    "format_rules": {
+                        "data_structure": "FLAT"
+                    },
+                    "param_name": "pageSize",
+                    "param_type": "INTEGER",
+                    "required": false,
+                    "validation_rules": {
+                        "max_value": 20,
+                        "min_value": 1
+                    }
+                },
+                {
+                    "default_value": "en",
+                    "dependencies": null,
+                    "description": "The language in which to return results.",
+                    "example_values": [
+                        "en",
+                        "es"
+                    ],
+                    "format_rules": {
+                        "data_structure": "FLAT"
+                    },
+                    "param_name": "languageCode",
+                    "param_type": "STRING",
+                    "required": false,
+                    "validation_rules": null
+                }
+            ],
+            "headers": [
+                {
+                    "allowed_values": null,
+                    "default_value": null,
+                    "dependencies": [],
+                    "description": "Specifies which fields should be included in the API response to optimize data retrieval and minimize payload size.",
+                    "example_values": [
+                        "places.displayName,places.formattedAddress"
+                    ],
+                    "header_name": "X-Goog-FieldMask",
+                    "required": true
+                }
+            ],
+            "human_context": {
+                "description": "The Text Search (New) API enables users to search for places based on a text query, such as 'pizza in New York'. It can return a variety of places, including businesses and addresses, and allows for additional filtering through parameters like price levels and location bias. The response includes a list of places that match the query, with details such as display name, formatted address, and types, based on the specified field mask. This API is ideal for applications that require flexible search capabilities based on user input.",
+                "qa_section": {
+                    "Are there specific filters required?": "Filters such as price levels, location bias, and open status can be applied to refine search results.",
+                    "How does pagination affect retrieval?": "Pagination is managed through the pageSize parameter, limiting results per request, and the nextPageToken for accessing additional results.",
+                    "What information can be retrieved?": "Returns a list of places matching the text query, including details such as display name, formatted address, and types."
+                }
+            },
+            "method": {
+                "type": "POST"
+            },
+            "response_format": {
+                "places": [
+                    {
+                        "displayName": {
+                            "languageCode": "STRING",
+                            "text": "STRING"
+                        },
+                        "formattedAddress": "STRING",
+                        "id": "STRING",
+                        "types": [
+                            "STRING"
+                        ]
+                    }
+                ]
+            },
+            "url_params": [],
+            "validation_endpoint": {
+                "endpoint": null
+            }
+        }
+    },
+    "human_context": {
+        "description": "AI Agent Guidance: The Places API provides access to location-based data, including details about places, photos, and search functionalities. It enables users to query, filter, and retrieve structured information about various establishments and points of interest.",
+        "qa_section": {
+            "Are there any special considerations for using this API effectively?": "To optimize usage, specify field masks to limit the data returned, use location biases for more relevant results, and paginate requests to manage large datasets efficiently.",
+            "What services does this API provide?": "This API allows retrieval of place details, nearby searches, text searches, and autocomplete suggestions for places based on user input.",
+            "What types of data can be retrieved or modified?": "The API retrieves structured data about places, including names, addresses, types, ratings, reviews, photos, and operational details such as opening hours and payment options."
+        }
+    }
+}
