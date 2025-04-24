@@ -41,7 +41,7 @@ Each API endpoint is listed below along with:
   ```json
   {
     "context": "Meeting with Alice and Bob on April 5th...",
-    "db_path": "path/to/database.db",
+    "db_path": "path/to/database.db"
   }
   ```
 - **Output**:
@@ -115,6 +115,7 @@ Each API endpoint is listed below along with:
   ```json
   {
     "api_schema": {...}
+    "api_schema": {...}
   }
   ```
 
@@ -140,6 +141,11 @@ Each API endpoint is listed below along with:
   ```
 - **Output**:
   A short and punchy LinkedIn post ready to publish.
+  ```json
+  {
+    "response": "..."
+  }
+  ```
   ```json
   {
     "response": "..."
