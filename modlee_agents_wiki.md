@@ -28,7 +28,7 @@ Each API endpoint is listed below along with:
 - **Output**: A natural language response like:
   ```json
   {
-    "response": "The invention of the internet is attributed to multiple researchers, including Vint Cerf and Bob Kahn..."
+    "answer": "The invention of the internet is attributed to multiple researchers, including Vint Cerf and Bob Kahn..."
   }
   ```
 
@@ -40,22 +40,17 @@ Each API endpoint is listed below along with:
 - **Input**:
   ```json
   {
-    "context": "Meeting with Alice and Bob on April 5th...",
-    "db_path": "path/to/database.db"
+    "input_text": "Meeting with Alice and Bob on 21st March...",
+    "schema": {...}
   }
   ```
 - **Output**:
   ```json
   {
     "structured_data": {
-      "meetings": [...],
-      "participants": [...],
-      "action_items": [...]
-    },
-    "input_queries": [
-      ["INSERT INTO meetings ...", [...]],
-      ["INSERT INTO participants ...", [...]]
-    ]
+      "attendees": ["Alice", "Bob"],
+      "date": "2025-03-21"
+    }
   }
   ```
 
@@ -114,8 +109,7 @@ Each API endpoint is listed below along with:
 - **Output**:
   ```json
   {
-    "api_schema": {...}
-    "api_schema": {...}
+    "schema": {...}
   }
   ```
 
@@ -141,16 +135,6 @@ Each API endpoint is listed below along with:
   ```
 - **Output**:
   A short and punchy LinkedIn post ready to publish.
-  ```json
-  {
-    "response": "..."
-  }
-  ```
-  ```json
-  {
-    "response": "..."
-  }
-  ```
 
 ---
 
@@ -181,7 +165,7 @@ Each API endpoint is listed below along with:
    - Use Postman, Curl, or your own app.
    - Add this to your headers:
      ```
-     "X-API-KEY": YOUR_API_KEY
+     Authorization: Bearer YOUR_API_KEY
      ```
 4. **Check the Response**: All responses are in JSON. They’re easy to read and use in your app or project.
 
