@@ -47,7 +47,7 @@ Each API endpoint is listed below along with:
 - **Output**:
   ```json
   {
-    "final_accuracy_%": 87.5,
+    "accuracy": 87.5,
     "num_training_examples": 1500
   }
   ```
@@ -66,29 +66,34 @@ Each API endpoint is listed below along with:
 - **Output**: A natural language response like:
   ```json
   {
-    "answer": "The invention of the internet is attributed to multiple researchers, including Vint Cerf and Bob Kahn..."
+    "response": "The invention of the internet is attributed to multiple researchers, including Vint Cerf and Bob Kahn..."
   }
   ```
 
 ---
 
 ### 5. `/data_aggregator_agent`
-- **What it does**: Converts messy natural language data (e.g., meeting notes) into structured JSON using a provided database schema.
+- **What it does**: Converts natural language text (e.g., meeting notes) into structured data based on a database schema inferred from a provided SQLite file.
 - **Method**: POST
 - **Input**:
   ```json
   {
-    "input_text": "Meeting with Alice and Bob on 21st March...",
-    "schema": {...}
+    "context": "Meeting with Alice and Bob on April 5th...",
+    "db_path": "path/to/database.db"
   }
   ```
 - **Output**:
   ```json
   {
     "structured_data": {
-      "attendees": ["Alice", "Bob"],
-      "date": "2025-03-21"
-    }
+      "meetings": [...],
+      "participants": [...],
+      "action_items": [...]
+    },
+    "input_queries": [
+      ["INSERT INTO meetings ...", [...]],
+      ["INSERT INTO participants ...", [...]]
+    ]
   }
   ```
 
@@ -147,7 +152,7 @@ Each API endpoint is listed below along with:
 - **Output**:
   ```json
   {
-    "schema": {...}
+    "api_schema": {...}
   }
   ```
 
@@ -166,7 +171,11 @@ Each API endpoint is listed below along with:
   ```
 - **Output**:
   A polished blog in Markdown format with sections and FAQs.
-
+  ```json
+  {
+    "response": "..."
+  }
+  ```
 ---
 
 ### 10. `/core_docs_agent_blog`
@@ -189,6 +198,11 @@ Each API endpoint is listed below along with:
   ```
 - **Output**:
   A short and punchy LinkedIn post ready to publish.
+  ```json
+  {
+    "response": "..."
+  }
+  ```
 
 ---
 
@@ -204,26 +218,12 @@ Each API endpoint is listed below along with:
   ```
 - **Output**:
   A personalized sales pitch in plain text.
-
+  ```json
+  {
+    "response": "..."
+  }
+  ```
 ---
-
-### 13. `/submit_inquiry`
-- **What it does**: Used for collecting information (like email, company name, message) during onboarding.
-- **Method**: POST
-- **Input**:
-  ```json
-  {
-    "email": "someone@example.com",
-    "company": "AwesomeAI",
-    "message": "We want to use your platform..."
-  }
-  ```
-- **Output**:
-  ```json
-  {
-    "status": "success"
-  }
-  ```
 
 ---
 
@@ -234,7 +234,7 @@ Each API endpoint is listed below along with:
    - Use Postman, Curl, or your own app.
    - Add this to your headers:
      ```
-     Authorization: Bearer YOUR_API_KEY
+     "X-API-KEY": YOUR_API_KEY
      ```
 3. **Check the Response**: All responses are in JSON. They’re easy to read and use in your app or project.
 

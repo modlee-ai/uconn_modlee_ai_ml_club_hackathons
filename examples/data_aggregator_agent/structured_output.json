@@ -1,0 +1,104 @@
+{
+  "input_queries": [
+    [
+      "INSERT INTO meetings (date, meeting_type, topics_covered) VALUES (?, ?, ?)",
+      [
+        "April 5th, 2025",
+        "Marketing",
+        "Q1 campaign performance, Instagram ad strategy"
+      ]
+    ],
+    [
+      "INSERT INTO participants (name) VALUES (?)",
+      [
+        "Alice"
+      ]
+    ],
+    [
+      "INSERT INTO participants (name) VALUES (?)",
+      [
+        "Bob"
+      ]
+    ],
+    [
+      "INSERT INTO meeting_attendees (meeting_id, participant_id) VALUES (?, ?)",
+      [
+        1,
+        1
+      ]
+    ],
+    [
+      "INSERT INTO meeting_attendees (meeting_id, participant_id) VALUES (?, ?)",
+      [
+        1,
+        2
+      ]
+    ],
+    [
+      "INSERT INTO marketing_adjustments (meeting_id, campaign_or_channel, change_details) VALUES (?, ?, ?)",
+      [
+        1,
+        "Instagram",
+        "Adjustments to the ad strategy"
+      ]
+    ],
+    [
+      "INSERT INTO action_items (meeting_id, assigned_to, task_description, deadline, status) VALUES (?, ?, ?, ?, ?)",
+      [
+        1,
+        "Alice",
+        "Draft new ad copy",
+        "April 10th, 2025",
+        "Assigned"
+      ]
+    ]
+  ],
+  "structured_data": {
+    "action_items": [
+      {
+        "action_id": 1,
+        "assigned_to": "Alice",
+        "deadline": "April 10th, 2025",
+        "meeting_id": 1,
+        "status": "Assigned",
+        "task_description": "Draft new ad copy"
+      }
+    ],
+    "marketing_adjustments": [
+      {
+        "adjustment_id": 1,
+        "campaign_or_channel": "Instagram",
+        "change_details": "Adjustments to the ad strategy",
+        "meeting_id": 1
+      }
+    ],
+    "meeting_attendees": [
+      {
+        "meeting_id": 1,
+        "participant_id": 1
+      },
+      {
+        "meeting_id": 1,
+        "participant_id": 2
+      }
+    ],
+    "meetings": [
+      {
+        "date": "April 5th, 2025",
+        "meeting_id": 1,
+        "meeting_type": "Marketing",
+        "topics_covered": "Q1 campaign performance, Instagram ad strategy"
+      }
+    ],
+    "participants": [
+      {
+        "name": "Alice",
+        "participant_id": 1
+      },
+      {
+        "name": "Bob",
+        "participant_id": 2
+      }
+    ]
+  }
+}
