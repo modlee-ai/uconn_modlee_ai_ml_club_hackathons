@@ -6,7 +6,7 @@ import requests
 import sqlite3
 
 # Endpoint URL (adjust as needed)
-API_URL = "http://127.0.0.1:4000/data_aggregator_agent"
+API_URL = "https://agentsserver.modlee.ai:5000/data_aggregator_agent"
 
 # Optionally load API key from environment
 API_KEY = os.getenv("MODLEE_API_KEY", "your-default-api-key")
@@ -140,4 +140,3 @@ def insert_structured_data(response_json):
 
 if __name__ == "__main__":
     call_data_aggregator_agent_with_db()
-    print('done')
