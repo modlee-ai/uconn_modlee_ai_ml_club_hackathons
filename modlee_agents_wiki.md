@@ -34,29 +34,7 @@ Each API endpoint is listed below along with:
 
 ---
 
-### 2. `/data_aggregator_agent`
-- **What it does**: Converts messy natural language data (e.g., meeting notes) into structured JSON using a provided database schema.
-- **Method**: POST
-- **Input**:
-  ```json
-  {
-    "input_text": "Meeting with Alice and Bob on 21st March...",
-    "schema": {...}
-  }
-  ```
-- **Output**:
-  ```json
-  {
-    "structured_data": {
-      "attendees": ["Alice", "Bob"],
-      "date": "2025-03-21"
-    }
-  }
-  ```
-
----
-
-### 3. `/data_operator_agent_sql`
+### 2. `/data_operator_agent_sql`
 - **What it does**: Ask a question about your SQL data in natural language, and it builds an SQL query for you.
 - **Method**: POST
 - **Input**:
@@ -77,7 +55,7 @@ Each API endpoint is listed below along with:
 
 ---
 
-### 4. `/data_operator_agent_rest`
+### 3. `/data_operator_agent_rest`
 - **What it does**: Converts a natural language question into a REST API call based on your API documentation/schema.
 - **Method**: POST
 - **Input**:
@@ -97,7 +75,7 @@ Each API endpoint is listed below along with:
 
 ---
 
-### 5. `/data_operator_agent_rest_schema`
+### 4. `/data_operator_agent_rest_schema`
 - **What it does**: Takes a raw block of API docs and turns it into a structured API schema the agent can use.
 - **Method**: POST
 - **Input**:
@@ -115,14 +93,14 @@ Each API endpoint is listed below along with:
 
 ---
 
-### 6. `/core_docs_agent_blog`
+### 5. `/core_docs_agent_blog`
 - **What it does**: Same as `/generate_blog`, but focused on technical documentation blogs.
 - **Method**: POST
 - **Input/Output**: Same as `/generate_blog`.
 
 ---
 
-### 7. `/core_docs_agent_social`
+### 6. `/core_docs_agent_social`
 - **What it does**: Generates a professional LinkedIn post based on your blog or content.
 - **Method**: POST
 - **Input**:
@@ -138,7 +116,7 @@ Each API endpoint is listed below along with:
 
 ---
 
-### 8. `/core_docs_agent_sales`
+### 7. `/core_docs_agent_sales`
 - **What it does**: Generates a sales message or email template tailored to your input.
 - **Method**: POST
 - **Input**:
