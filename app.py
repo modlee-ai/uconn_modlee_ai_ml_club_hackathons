@@ -42,8 +42,8 @@ def build_blog_payload(resume, jd):
             "text": jd
         }],
         "preferences": {
-            "authorNotes":    "Focus on work experiences and projects",            # you can put custom notes here
-            "flowNotes":      "Start with address, followed by 'Dear Hiring manager,', followed by intro, then skills, then work expeience, Please do not add FAQs, don't add the title, remove the comments, use less than 200 words ",            # or leave empty
+            "authorNotes":    "Focus on work experiences and projects, Write only the plain‑text cover letter body—no section headings, no markdown, no comments ",            # you can put custom notes here
+            "flowNotes":      "Start with address,date, followed by 'Dear Hiring manager,', followed by intro, then skills, then work expeience, Please do not add FAQs, don't add the title, remove the comments, use less than 200 words ",            # or leave empty
             "tone":           "Professional",
             "audienceDescription": "Hiring Manager",
             "length":         "short, less that 200 words, 3 paragraphs"        # short / medium / long
