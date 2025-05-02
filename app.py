@@ -30,7 +30,7 @@ if uploaded_resume:
 job_desc = st.text_area("📌 Paste the Job Description", height=200)
 
 # ------------------- Modlee API Setup -------------------
-API_KEY = "PASTE_YOUR_MODLEE_API_KEY_HERE"
+API_KEY = "5e303d0da6b499b9d59614709caa64f1"
 BLOG_URL = "https://agentsserver.modlee.ai:5000/core_docs_agent_blog"
 SOCIAL_URL = "https://agentsserver.modlee.ai:5000/core_docs_agent_social"
 HEADERS = {"X-API-KEY": API_KEY}
