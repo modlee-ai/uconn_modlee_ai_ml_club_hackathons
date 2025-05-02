@@ -46,7 +46,7 @@ def build_blog_payload(resume, jd):
             "flowNotes":      "Start with address, followed by 'Dear Hiring manager,', followed by intro, then skills, then work expeience, Please do not add FAQs, don't add the title, remove the comments ",            # or leave empty
             "tone":           "Professional",
             "audienceDescription": "Hiring Manager",
-            "length":         "short"        # short / medium / long
+            "length":         "short, less that 200 words, 3 paragraphs"        # short / medium / long
         },
         "strategy": {
             "seo":                "Data analyst resume, SQL, Projects, Coursework, Python",       # e.g. "Data Analyst resume"
