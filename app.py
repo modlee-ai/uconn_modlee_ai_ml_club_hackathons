@@ -4,7 +4,28 @@ import requests
 st.set_page_config(page_title="Smart Job Assistant")
 st.title("💼 Smart Job Application Assistant")
 
-resume = st.text_area("Paste your Resume", height=200)
+import fitz  # PyMuPDF
+import docx
+
+st.subheader("📄 Upload your Resume (.pdf or .docx)")
+uploaded_resume = st.file_uploader("Choose your resume file", type=["pdf", "docx"])
+
+def extract_text(file):
+    if file.name.endswith(".pdf"):
+        with fitz.open(stream=file.read(), filetype="pdf") as doc:
+            return "\n".join([page.get_text() for page in doc])
+    elif file.name.endswith(".docx"):
+        doc = docx.Document(file)
+        return "\n".join([para.text for para in doc.paragraphs])
+    else:
+        return ""
+
+resume_text = ""
+if uploaded_resume:
+    resume_text = extract_text(uploaded_resume)
+    st.success("✅ Resume uploaded and processed successfully!")
+
+
 job_desc = st.text_area("Paste the Job Description", height=200)
 
 API_KEY = "5e303d0da6b499b9d59614709caa64f1"
