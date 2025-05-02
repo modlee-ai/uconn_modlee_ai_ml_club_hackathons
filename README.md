@@ -23,7 +23,6 @@ bumpbridge-AI/
 ├── main.py             # Streamlit frontend (user input and API integration)
 ├── agents.py           # Agent request handler with dotenv config
 ├── .env                # Secure storage of API key (not committed)
-└── bumpbridge_post.txt # Sample generated post output (optional)
 ```
 
 ## 🔐 Environment Setup
@@ -33,21 +32,10 @@ MODLEE_AGENTS_API_KEY=6406c861d5a67f68fffeadcf6f0cd597
 ```
 
 ## ▶️ How to Run
-1. Clone the project repo:
-```bash
-git clone https://github.com/YOUR_USERNAME/uconn_modlee_ai_ml_club_hackathon.git
-```
-
-2. Navigate to your project folder and install requirements:
-```bash
-cd bumpbridge-AI
-pip install -r requirements.txt  # (Create one with streamlit, dotenv, requests)
-```
-
-3. Run the app:
-```bash
-streamlit run main.py
-```
+Step 1: Setup environment
+Step 2: Run the Agents.py code in the terminal (python agents.py)
+Step 3: Run the Main.py code in the terminal 
+[python -m streamlit run main.py]
 
 ## 📸 Demo Screenshots
 ![image](https://github.com/user-attachments/assets/0d4ad05a-eabd-4b7d-879a-3a1f9bf06fe3)
