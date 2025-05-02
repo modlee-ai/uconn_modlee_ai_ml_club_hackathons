@@ -42,16 +42,16 @@ def build_blog_payload(resume, jd):
             "text": jd
         }],
         "preferences": {
-            "authorNotes":    "",            # you can put custom notes here
-            "flowNotes":      "",            # or leave empty
+            "authorNotes":    "Focus on work experiences and projects",            # you can put custom notes here
+            "flowNotes":      "Start with intro, then skills, then work expeience",            # or leave empty
             "tone":           "Professional",
             "audienceDescription": "Hiring Manager",
             "length":         "short"        # short / medium / long
         },
         "strategy": {
-            "seo":                "",       # e.g. "Data Analyst resume"
-            "companyContext":     "",       # e.g. "Tech startup"
-            "referenceBlog":      ""        # any example blog URL/text
+            "seo":                "Data analyst resume, SQL, Projects, Coursework, Python",       # e.g. "Data Analyst resume"
+            "companyContext":     "Tech startup, fintech company, Top consulting firms",       # e.g. "Tech startup"
+            "referenceBlog":      "https://images.ctfassets.net/wp1lcwdav1p1/VrC968tP78Ae91jsbzcAt/8d7dce61a3fdf10c317bff9da0236134/Sample_Data_Analyst_Cover_Letter.png?w=1500&q=60"        # any example blog URL/text
         }
     }
 
@@ -62,16 +62,16 @@ def build_social_payload(resume, jd):
             "text": jd
         }],
         "preferences": {
-            "authorNotes":        "",
-            "flowNotes":          "",
-            "tone":               "Friendly",
+            "authorNotes":        "write just the message, no extra text",
+            "flowNotes":          "Open with greeting, followed by Intrest and end it with thankyou",
+            "tone":               "Friendly, professional",
             "audienceDescription": "Recruiter",
             "length":             "short"
         },
         "strategy": {
             "seo":                "",
-            "companyContext":     "",
-            "referenceBlog":      ""
+            "companyContext":     "networking outreach",
+            "referenceBlog":      "https://simplestic.com/email-example-for-networking/"
         }
     }
 
