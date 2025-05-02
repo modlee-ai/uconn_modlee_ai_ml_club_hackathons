@@ -1,98 +1,55 @@
-# 🧠 UCONN Modlee AI/ML Club Hackathon
+# 🧠 SQL Coach CLI — Powered by Modlee Agents
 
-This README contains everything you need to know about how the hackathon works, how to get started, and how to submit your project.
-
----
-
-## 📌 Overview
-
-In this hackathon, your team will build an **AI Agent-based application** using the **Modlee Agents API**. This is a great opportunity to:
-
-- Learn how to work with real AI APIs
-- Build a resume-worthy project
-- Work with a team on a complete idea from start to finish
-- Get hands-on help and support throughout the event
+**SQL Coach CLI** is a command-line tool that transforms natural language questions into executable SQL queries using Modlee's advanced `data_operator_agent_sql`. It's perfect for analysts, developers, or anyone who wants to query databases without writing raw SQL.
 
 ---
 
+## 🚀 What This Project Does
 
-## 📅 Timeline
-
-- **Hackathon Start**: April 24th, 2025  
-- **Hackathon End / Submission Deadline**: **May 2nd, 2025 at 5:00 PM EST**
-
-Make sure to submit everything by the deadline — late submissions won’t be considered for judging.
-
----
-
-## 👥 Team Guidelines
-
-- You must work in a **team of 2 to 4 students**
-- **Modlee Club leadership** will help you find a team if needed.
+- Converts user questions into SQL using a Modlee Agent.
+- Runs the SQL against a mock SQLite database.
+- Displays query results in the terminal.
+- Logs every question, query, result count, and feedback score.
+- Provides a schema file for AI-guided query construction.
 
 ---
 
-## 🛠️ What You’ll Build
+## 🧩 Modlee Agent Used
 
-Your application must use at least one of the **Modlee Agents**, which support:
+This project uses:
 
-- SQL-based data aggregation and retrieval  
-- Blog generation  
-- Social media post generation  
+### ✅ `data_operator_agent_sql`
 
-We will provide:
-- A **template API key** for your team  
-- A **starter GitHub repo** with:
-  - Documentation for each agent
-  - Sample code showing how to use them
-  - Instructions for submitting your project (see below)
-  - Refer support [wiki](uconn_modlee_ai_ml_club_hackathons/modlee_agents_wiki.md) for more details
----
-
-## 🧑‍💻 Daily Help Sessions
-
-- We’ll host **1-hour support sessions daily ("Help Hours")**
-- These will be hosted from 2:00 PM - 3:00 PM EST everyday from April 24th till May 2nd.
-- Someone from **Modlee** will be there to help with any technical blockers or project issues
+- **Role**: Converts natural language questions into SQL.
+- **How it's used**:
+  - Receives your question and the database schema.
+  - Returns an SQL query and parameters.
+  - Example usage payload:
+    ```json
+    {
+      "user_question": "What are the top 5 products by sales?",
+      "schema": { ... }
+    }
+    ```
 
 ---
 
-## ✅ Submission Instructions
+## 💡 Example Usage
+Your question: Which region has the highest total sales?
 
-All teams must submit their final projects through the provided GitHub repo.
+1. Contacting Modlee agent...
+2. SQL Generated: SELECT region, SUM(total_cost) as revenue FROM sales_data GROUP BY region ORDER BY revenue DESC LIMIT 1;
+3. Results:
+  ('West', 20232.15)
+4. Rate this answer from 1–5 🌟:
 
-### Submission steps:
-1. **Clone or fork** the official [Modlee Hackathon Repo](https://github.com/modlee-ai/uconn_modlee_ai_ml_club_hackathons) 
-2. Create a **new branch** with your **team name**  
-   Example:  
-   ```bash
-   git checkout -b team_uconn
-   ```
-3. Add your code to the branch
-4. Include a clear `README.md` in your branch that explains:
-    - What your project does
-    - Which Modlee Agents you used and how
-    - How to set up and run your project
-    - Any demo links, examples, or screenshots
+## 📷 Screenshots
+Prompting and Response
 
-## 🏆 Prizes
-Modlee will award cash prizes to the top 3 teams:
-- 🥇 First Place: $300
-- 🥈 Second Place: $200
-- 🥉 Third Place: $100
+![image](https://github.com/user-attachments/assets/5eb61322-625f-451d-af57-e502422508dd)
 
-## 📣 Winner Announcement
-- Winners will be announced on Modlee’s LinkedIn
-- Follow Modlee on LinkedIn to see the results and get featured!
+## 🎥 Demo
+If you’d like to see SQL Coach CLI in action, check out the following demo:
 
-## 🎓 Learning Goals
-By the end of this hackathon, you will have:
-  - Built a functional AI Agent application
-  - Worked with a production-ready API
-  - Completed a project with full documentation on GitHub
-  - Learned teamwork, version control, and system design fundamentals
+Watch the demo video here (https://www.loom.com/share/595defbfabbf4e68ab8a583bada727d8?sid=169d139d-8d44-4312-8a41-d0a836297769)
 
-## 🚀 Let’s Build!
-We're excited to see what you create! If you have questions, show up to the Help Hours or reach out to any club officer.
-
-Good luck, and have fun building with agents!
