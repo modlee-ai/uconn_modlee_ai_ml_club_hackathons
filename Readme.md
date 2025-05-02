@@ -59,6 +59,10 @@ The live app is available at: https://team-one-nnvf5ywosxrthjkb9ikxbz.streamlit.
 Screenshot of the interface
 ![Screenshot 2025-05-02 150252](https://github.com/user-attachments/assets/a292b5cd-681d-46bc-8227-7cfb5fe51e97)
 
+Screenshot of the Output
+![Screenshot 2025-05-02 151415](https://github.com/user-attachments/assets/a73b7dc9-e5ca-4e41-8f68-23880196aada)
+
+
 
 ---
 
