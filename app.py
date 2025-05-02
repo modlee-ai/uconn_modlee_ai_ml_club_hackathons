@@ -37,14 +37,21 @@ HEADERS = {"X-API-KEY": API_KEY}
 
 def build_payload(jd, type):
     return {
-        "sources": [{"name": "Job Description", "text": jd}],
+        "sources": [{
+            "name": "Job Description", 
+            "text": f"{jd}"}],
         "preferences": {
             "authorNotes": f"Generate a {type} message. Keep it short and professional.",
+             "flowNotes": ""
             "tone": "Professional" if type == "cover letter" else "Friendly",
             "audienceDescription": "Recruiter"
+            "length": "long"
         },
         "strategy": {
+            "seo": ""
             "companyContext": "Resume provided separately"
+             "referenceBlog": ""
+            
         }
     }
 
