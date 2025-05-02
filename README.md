@@ -50,9 +50,8 @@ streamlit run main.py
 ```
 
 ## 📸 Demo Screenshots
-- App layout with header and emoji branding
-- Persona dropdown selection and tone selector
-- Generated awareness post and download option
+![image](https://github.com/user-attachments/assets/0d4ad05a-eabd-4b7d-879a-3a1f9bf06fe3)
+
 
 ## 📋 Sample Use Case
 > "A health worker wants to write an inspirational post on how fathers can support expecting mothers. They select the persona 'Nurse', tone 'Supportive', and CTA 'Volunteer to support expecting mothers'. With one click, the post is generated using the Modlee agent."
