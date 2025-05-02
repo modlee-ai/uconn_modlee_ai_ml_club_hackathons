@@ -1,98 +1,79 @@
-# 🧠 UCONN Modlee AI/ML Club Hackathon
+# 🤱 BumpBridge – Awareness Post Generator
 
-This README contains everything you need to know about how the hackathon works, how to get started, and how to submit your project.
+## 🧠 Overview
+**BumpBridge** is a maternal health awareness tool built using **Modlee's Agentic AI API**. It empowers users to generate targeted awareness posts using a voice/persona of their choice. These posts are tailored to different tones, audiences, and call-to-actions, ensuring impactful messaging for healthcare and community support around pregnancy and motherhood.
 
----
+## 🚀 Features
+- **Persona-driven voice selection** (e.g. Nurse, Young Mother, NGO Worker)
+- **User-customized tone and target audience**
+- **Call-to-action dropdown suggestions**
+- **Post source input** for story or factual inspiration
+- **One-click generation of awareness posts** via Modlee’s `core_docs_agent_social` endpoint
+- **Downloadable output** for easy sharing
 
-## 📌 Overview
+## 🧩 Modlee Agent Used
+We used the following Modlee Agent:
 
-In this hackathon, your team will build an **AI Agent-based application** using the **Modlee Agents API**. This is a great opportunity to:
+**`/core_docs_agent_social`** – This Modlee agent allows generation of short social posts based on structured user intent such as tone, topic, audience, and style preferences.
 
-- Learn how to work with real AI APIs
-- Build a resume-worthy project
-- Work with a team on a complete idea from start to finish
-- Get hands-on help and support throughout the event
+## 🛠️ Project Structure
+```
+bumpbridge-AI/
+│
+├── main.py             # Streamlit frontend (user input and API integration)
+├── agents.py           # Agent request handler with dotenv config
+├── .env                # Secure storage of API key (not committed)
+```
+## 🚀 Live Demo
 
----
+You can try the live version of our Streamlit app here:  
+👉 [**Launch BumpBridge App**](https://app-checkoutteamstardustuconn-fdcxutekgdbgj5zdntumsy.streamlit.app/)
 
+This interactive demo allows you to generate community-driven maternal health messages using Modlee AI agents. No installation needed — just click and explore!
 
-## 📅 Timeline
+## 🔐 Environment Setup
+Make sure to create a `.env` file in the project directory with your Modlee API key:
+```
+MODLEE_AGENTS_API_KEY=6406c861d5a67f68fffeadcf6f0cd597
+```
 
-- **Hackathon Start**: April 24th, 2025  
-- **Hackathon End / Submission Deadline**: **May 2nd, 2025 at 5:00 PM EST**
+## ▶️ How to Run
 
-Make sure to submit everything by the deadline — late submissions won’t be considered for judging.
+Follow the steps below to run the project locally:
 
----
-
-## 👥 Team Guidelines
-
-- You must work in a **team of 2 to 4 students**
-- **Modlee Club leadership** will help you find a team if needed.
-
----
-
-## 🛠️ What You’ll Build
-
-Your application must use at least one of the **Modlee Agents**, which support:
-
-- SQL-based data aggregation and retrieval  
-- Blog generation  
-- Social media post generation  
-
-We will provide:
-- A **template API key** for your team  
-- A **starter GitHub repo** with:
-  - Documentation for each agent
-  - Sample code showing how to use them
-  - Instructions for submitting your project (see below)
-  - Refer support [wiki](uconn_modlee_ai_ml_club_hackathons/modlee_agents_wiki.md) for more details
----
-
-## 🧑‍💻 Daily Help Sessions
-
-- We’ll host **1-hour support sessions daily ("Help Hours")**
-- These will be hosted from 2:00 PM - 3:00 PM EST everyday from April 24th till May 2nd.
-- Someone from **Modlee** will be there to help with any technical blockers or project issues
-
----
-
-## ✅ Submission Instructions
-
-All teams must submit their final projects through the provided GitHub repo.
-
-### Submission steps:
-1. **Clone or fork** the official [Modlee Hackathon Repo](https://github.com/modlee-ai/uconn_modlee_ai_ml_club_hackathons) 
-2. Create a **new branch** with your **team name**  
-   Example:  
+1. **Setup the environment**  
+   Make sure you have Python 3 installed. It's recommended to use a virtual environment.
    ```bash
-   git checkout -b team_uconn
-   ```
-3. Add your code to the branch
-4. Include a clear `README.md` in your branch that explains:
-    - What your project does
-    - Which Modlee Agents you used and how
-    - How to set up and run your project
-    - Any demo links, examples, or screenshots
+   python -m venv venv
+   source venv/bin/activate    # On Windows use: venv\Scripts\activate
+      python agents.py
+      python -m streamlit run main.py
 
-## 🏆 Prizes
-Modlee will award cash prizes to the top 3 teams:
-- 🥇 First Place: $300
-- 🥈 Second Place: $200
-- 🥉 Third Place: $100
 
-## 📣 Winner Announcement
-- Winners will be announced on Modlee’s LinkedIn
-- Follow Modlee on LinkedIn to see the results and get featured!
 
-## 🎓 Learning Goals
-By the end of this hackathon, you will have:
-  - Built a functional AI Agent application
-  - Worked with a production-ready API
-  - Completed a project with full documentation on GitHub
-  - Learned teamwork, version control, and system design fundamentals
+## 📸 Demo Screenshots
+![image](https://github.com/user-attachments/assets/0d4ad05a-eabd-4b7d-879a-3a1f9bf06fe3)
 
-## 🚀 Let’s Build!
-We're excited to see what you create! If you have questions, show up to the Help Hours or reach out to any club officer.
 
-Good luck, and have fun building with agents!
+## 📋 Sample Use Case
+> "A health worker wants to write an inspirational post on how fathers can support expecting mothers. They select the persona 'Nurse', tone 'Supportive', and CTA 'Volunteer to support expecting mothers'. With one click, the post is generated using the Modlee agent."
+
+## ✅ Submission Details
+This project is submitted as part of the **UConn Modlee AI/ML Club Hackathon**.
+
+### Team Name
+**Team_Stardust**
+
+### Contributors
+- Jasvitha Vatsavaya (💡 Idea, UI Design, Modlee Integration, Testing)
+
+### Git Branch for Submission
+```bash
+github-checkout_Team_Stardust
+```
+
+## 🙌 Acknowledgments
+Thanks to Modlee and UConn AI/ML Club for organizing this hackathon and providing powerful APIs to bring our ideas to life.
+
+---
+Feel free to contact us for demo videos or additional explanation.
