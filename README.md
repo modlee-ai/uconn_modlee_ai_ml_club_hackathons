@@ -32,10 +32,21 @@ MODLEE_AGENTS_API_KEY=6406c861d5a67f68fffeadcf6f0cd597
 ```
 
 ## ▶️ How to Run
-Step 1: Setup environment
-Step 2: Run the Agents.py code in the terminal (python agents.py)
-Step 3: Run the Main.py code in the terminal 
-[python -m streamlit run main.py]
+
+Follow the steps below to run the project locally:
+
+1. **Setup the environment**  
+   Make sure you have Python 3 installed. It's recommended to use a virtual environment.
+   ```bash
+   python -m venv venv
+   source venv/bin/activate    # On Windows use: venv\Scripts\activate
+   pip install -r requirements.txt
+
+   python agents.py
+
+python -m streamlit run main.py
+
+
 
 ## 📸 Demo Screenshots
 ![image](https://github.com/user-attachments/assets/0d4ad05a-eabd-4b7d-879a-3a1f9bf06fe3)
