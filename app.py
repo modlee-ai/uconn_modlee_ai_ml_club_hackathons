@@ -42,7 +42,7 @@ def build_cover_payload(jd):
             "text": jd
         }],
         "preferences": {
-            "authorNotes":        "Focus on projects and skills",            # e.g. "Focus on projects and skills"
+            "authorNotes":        "Focus on projects and skills,Return only the plain‑text letter body. Do not include any headings, markdown syntax, or comments.",            # e.g. "Focus on projects and skills"
             "flowNotes":          "start with address, date, 'Dear hiring manager', intro, skills, work experience, projects",            # e.g. "Start with greeting, then match resume"
             "tone":               "Professional",
             "audienceDescription":"Hiring Manager",
