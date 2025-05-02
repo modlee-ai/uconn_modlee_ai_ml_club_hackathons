@@ -24,6 +24,12 @@ bumpbridge-AI/
 ├── agents.py           # Agent request handler with dotenv config
 ├── .env                # Secure storage of API key (not committed)
 ```
+## 🚀 Live Demo
+
+You can try the live version of our Streamlit app here:  
+👉 [**Launch BumpBridge App**](https://app-checkoutteamstardustuconn-fdcxutekgdbgj5zdntumsy.streamlit.app/)
+
+This interactive demo allows you to generate community-driven maternal health messages using Modlee AI agents. No installation needed — just click and explore!
 
 ## 🔐 Environment Setup
 Make sure to create a `.env` file in the project directory with your Modlee API key:
