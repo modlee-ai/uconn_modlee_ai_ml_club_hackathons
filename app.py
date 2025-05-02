@@ -62,18 +62,21 @@ def build_social_payload(resume, jd):
             "text": jd
         }],
         "preferences": {
-            "authorNotes":        "write just the message, no extra text",
-            "flowNotes":          "Open with greeting, followed by Intrest and end it with thankyou",
-            "tone":               "Friendly, professional",
-            "audienceDescription": "Recruiter",
-            "length":             "short"
+            "audience": "Data analysts, business analysts, Hiring manager",
+            "flowNotes": "start with Hello,followed by intro, The text highlights looking for internships",
+            "tone": "Professional yet approachable, with clear explanations and industry terminology.",
+            "length": 100
         },
         "strategy": {
             "seo":                "",
             "companyContext":     "networking outreach",
-            "referenceBlog":      "https://simplestic.com/email-example-for-networking/"
+            "referencePost":      "https://simplestic.com/email-example-for-networking/"
         }
     }
+ 
+    "sources": {
+        "text": "AI in testing has evolved from machine learning to generative AI and now Agentic AI, enhancing automation, decision-making, and compliance."
+    
 
 # ─── API caller ─────────────────────────────────────────
 def call_modlee(url, payload):
