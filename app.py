@@ -1,12 +1,13 @@
 import streamlit as st
 import requests
+import fitz  # PyMuPDF for PDF reading
+import docx  # python-docx for Word reading
 
+# ------------------- Page Setup -------------------
 st.set_page_config(page_title="Smart Job Assistant")
 st.title("💼 Smart Job Application Assistant")
 
-import fitz  # PyMuPDF
-import docx
-
+# ------------------- Resume Upload -------------------
 st.subheader("📄 Upload your Resume (.pdf or .docx)")
 uploaded_resume = st.file_uploader("Choose your resume file", type=["pdf", "docx"])
 
@@ -25,10 +26,11 @@ if uploaded_resume:
     resume_text = extract_text(uploaded_resume)
     st.success("✅ Resume uploaded and processed successfully!")
 
+# ------------------- Job Description -------------------
+job_desc = st.text_area("📌 Paste the Job Description", height=200)
 
-job_desc = st.text_area("Paste the Job Description", height=200)
-
-API_KEY = "5e303d0da6b499b9d59614709caa64f1"
+# ------------------- Modlee API Setup -------------------
+API_KEY = "PASTE_YOUR_MODLEE_API_KEY_HERE"
 BLOG_URL = "https://agentsserver.modlee.ai:5000/core_docs_agent_blog"
 SOCIAL_URL = "https://agentsserver.modlee.ai:5000/core_docs_agent_social"
 HEADERS = {"X-API-KEY": API_KEY}
@@ -52,20 +54,21 @@ def call_modlee(url, payload):
         if r.status_code == 200:
             return r.json().get("response", "").strip()
         else:
-            return f"Error {r.status_code}: {r.text}"
+            return f"❌ Error {r.status_code}: {r.text}"
     except Exception as e:
-        return str(e)
+        return f"❌ Exception: {str(e)}"
 
-if st.button("Generate"):
-    if not resume or not job_desc:
-        st.warning("Please paste both Resume and Job Description.")
+# ------------------- Generate Button -------------------
+if st.button("🚀 Generate"):
+    if not resume_text or not job_desc:
+        st.warning("⚠️ Please upload your resume and paste the job description before generating.")
     else:
-        with st.spinner("Generating..."):
-            cover = call_modlee(BLOG_URL, build_payload(job_desc, "cover letter"))
-            msg = call_modlee(SOCIAL_URL, build_payload(job_desc, "linkedin message"))
+        with st.spinner("🔧 Generating content..."):
+            cover_letter = call_modlee(BLOG_URL, build_payload(job_desc, "cover letter"))
+            linkedin_msg = call_modlee(SOCIAL_URL, build_payload(job_desc, "linkedin message"))
 
         st.subheader("📄 Cover Letter")
-        st.markdown(cover)
+        st.markdown(cover_letter)
 
         st.subheader("💬 LinkedIn Message")
-        st.markdown(msg)
+        st.markdown(linkedin_msg)
