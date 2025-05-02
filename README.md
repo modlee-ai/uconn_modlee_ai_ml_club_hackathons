@@ -40,11 +40,8 @@ Follow the steps below to run the project locally:
    ```bash
    python -m venv venv
    source venv/bin/activate    # On Windows use: venv\Scripts\activate
-   pip install -r requirements.txt
-
-   python agents.py
-
-python -m streamlit run main.py
+      python agents.py
+      python -m streamlit run main.py
 
 
 
