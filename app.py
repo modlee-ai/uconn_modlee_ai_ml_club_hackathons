@@ -43,7 +43,7 @@ def build_blog_payload(resume, jd):
         }],
         "preferences": {
             "authorNotes":    "Focus on work experiences and projects",            # you can put custom notes here
-            "flowNotes":      "Start with intro, then skills, then work expeience",            # or leave empty
+            "flowNotes":      "Start with intro, then skills, then work expeience, Please do not add FAQs",            # or leave empty
             "tone":           "Professional",
             "audienceDescription": "Hiring Manager",
             "length":         "short"        # short / medium / long
