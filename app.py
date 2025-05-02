@@ -83,20 +83,44 @@ def call_modlee(url, payload):
     else:
         return f"❌ Error {r.status_code}: {r.text}"
 
-# ─── Generate button ───────────────────────────────────
+
+# ─── Generate button with LinkedIn debug ─────────────────────────────
 if st.button("🚀 Generate Cover Letter & LinkedIn Message"):
     if not resume_text or not job_desc:
         st.warning("⚠️ Please upload a resume and paste the job description.")
     else:
         with st.spinner("🔧 Generating..."):
+            # Build payloads
             blog_payload   = build_blog_payload(resume_text, job_desc)
             social_payload = build_social_payload(resume_text, job_desc)
 
+            # Call Cover Letter API
             cover_letter = call_modlee(BLOG_URL, blog_payload)
-            linkedin_msg = call_modlee(SOCIAL_URL, social_payload)
 
+            # ─── Debug block for LinkedIn ───────────────────────
+            with st.expander("🔍 Debug LinkedIn API call"):
+                st.write("**Payload sent to social agent:**")
+                st.json(social_payload)
+
+                resp = requests.post(SOCIAL_URL, json=social_payload, headers=HEADERS)
+                st.write("**Status code:**", resp.status_code)
+                try:
+                    st.write("**Full response JSON:**")
+                    st.json(resp.json())
+                except Exception:
+                    st.write("**Raw response text:**", resp.text)
+            # ──────────────────────────────────────────────────────
+
+            # Use the debugged response (fall back on error message)
+            if resp.status_code == 200:
+                linkedin_msg = resp.json().get("response", "").strip()
+            else:
+                linkedin_msg = f"❌ LinkedIn API error {resp.status_code}. See debug above."
+
+        # ─── Show outputs ───────────────────────────────────
         st.subheader("📄 Cover Letter")
         st.markdown(cover_letter)
 
         st.subheader("💬 LinkedIn Message")
         st.markdown(linkedin_msg)
+
